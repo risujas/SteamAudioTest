@@ -1471,7 +1471,7 @@ PrefabInstance:
     - target: {fileID: 401320410805206389, guid: 4276690ddfa5c4c49a0ea3cb666f9b3c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.532
+      value: -5.3
       objectReference: {fileID: 0}
     - target: {fileID: 401320410805206389, guid: 4276690ddfa5c4c49a0ea3cb666f9b3c,
         type: 3}
@@ -1481,7 +1481,7 @@ PrefabInstance:
     - target: {fileID: 401320410805206389, guid: 4276690ddfa5c4c49a0ea3cb666f9b3c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.402
+      value: -1.29
       objectReference: {fileID: 0}
     - target: {fileID: 401320410805206389, guid: 4276690ddfa5c4c49a0ea3cb666f9b3c,
         type: 3}
@@ -1518,10 +1518,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5168042623476779269, guid: 4276690ddfa5c4c49a0ea3cb666f9b3c,
+    - target: {fileID: 2575689013526291327, guid: 4276690ddfa5c4c49a0ea3cb666f9b3c,
         type: 3}
-      propertyPath: Loop
-      value: 1
+      propertyPath: interval
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5168042623476779269, guid: 4276690ddfa5c4c49a0ea3cb666f9b3c,
         type: 3}
@@ -2122,10 +2122,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5168042623476779269, guid: 4276690ddfa5c4c49a0ea3cb666f9b3c,
+    - target: {fileID: 2575689013526291327, guid: 4276690ddfa5c4c49a0ea3cb666f9b3c,
         type: 3}
-      propertyPath: Loop
-      value: 1
+      propertyPath: interval
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5168042623476779269, guid: 4276690ddfa5c4c49a0ea3cb666f9b3c,
         type: 3}
@@ -2209,6 +2209,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2575689013526291327, guid: 4276690ddfa5c4c49a0ea3cb666f9b3c,
+        type: 3}
+      propertyPath: interval
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5168042623476779269, guid: 4276690ddfa5c4c49a0ea3cb666f9b3c,
         type: 3}
