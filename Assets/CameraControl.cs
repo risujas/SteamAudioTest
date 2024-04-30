@@ -20,7 +20,7 @@ public class CameraControl : MonoBehaviour
 
 	private void Update()
 	{
-		if (!audioSourceMover.HasObjectSelected)
+		if (!audioSourceMover.SelectedGameObject)
 		{
 			var input = Input.GetAxis("Mouse ScrollWheel");
 			desiredHeight += -input * Time.deltaTime * zoomSpeed;

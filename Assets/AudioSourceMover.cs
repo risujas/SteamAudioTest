@@ -11,10 +11,7 @@ public class AudioSourceMover : MonoBehaviour
 
 	private GameObject selectedGameObject;
 
-	public bool HasObjectSelected
-	{
-		get { return selectedGameObject != null; }
-	}
+	public GameObject SelectedGameObject => selectedGameObject;
 
 	private void Update()
 	{
