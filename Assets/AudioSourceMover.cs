@@ -6,8 +6,10 @@ public class AudioSourceMover : MonoBehaviour
 {
 	[SerializeField] private LayerMask groundLayerMask;
 	[SerializeField] private LayerMask audioSourceLayerMask;
+
 	[SerializeField] private float minSourceHeight = 0.35f;
 	[SerializeField] private float maxSourceHeight = 5.0f;
+	[SerializeField] private float sourceHeightAdjustSpeed = 3.0f;
 
 	private GameObject selectedGameObject;
 
@@ -45,7 +47,7 @@ public class AudioSourceMover : MonoBehaviour
 			}
 
 			var input = Input.GetAxis("Mouse ScrollWheel");
-			selectedGameObject.transform.position += Vector3.up * input;
+			selectedGameObject.transform.position += Vector3.up * input * sourceHeightAdjustSpeed;
 			float y = Mathf.Clamp(selectedGameObject.transform.position.y, minSourceHeight, maxSourceHeight);
 			selectedGameObject.transform.position = new(selectedGameObject.transform.position.x, y, selectedGameObject.transform.position.z);
 		}
