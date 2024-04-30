@@ -620,8 +620,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 1783655258}
-  zoomSpeed: 400
-  lerpSpeed: 4
+  zoomSpeed: 1500
+  lerpSpeed: 10
   minHeight: 1
   maxHeight: 30
   audioSourceMover: {fileID: 1437318972}
