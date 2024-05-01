@@ -1,10 +1,9 @@
-Box select
+Box select (Visual WIP)
 Height adjustment
 Volume control
 Pause/play
 Pause/play all
 Orbit around listener
-Delete source
 Create source
 Prevent moving sources out of bounds
 Load clips dynamically from a folder
