@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8031836632516923443}
-  - component: {fileID: 5024712281486176878}
+  - component: {fileID: 9189558627559487533}
   m_Layer: 0
-  m_Name: Audio Source Mover
+  m_Name: Audio Source Selector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5024712281486176878
+--- !u!114 &9189558627559487533
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,15 +41,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6708362018984489944}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e464f6e562465b848af07c956c1cdbfb, type: 3}
+  m_Script: {fileID: 11500000, guid: e2212cae3e10a9d41b3fe2f8a0180ac3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 2048
   audioSourceLayerMask:
     serializedVersion: 2
     m_Bits: 1024
-  minSourceHeight: 0.35
-  maxSourceHeight: 5
-  sourceHeightAdjustSpeed: 3
