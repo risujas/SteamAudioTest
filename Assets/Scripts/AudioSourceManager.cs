@@ -7,6 +7,7 @@ public class AudioSourceManager : MonoBehaviour
 {
 	[SerializeField] private LayerMask audioSourceLayerMask;
 	[SerializeField] private List<AudioClip> availableClips;
+	[SerializeField] private BoxSelector boxSelector;
 
 	private List<AudioSourceController> selectedControllers = new List<AudioSourceController>();
 
@@ -52,27 +53,26 @@ public class AudioSourceManager : MonoBehaviour
 		{
 			bool multiSelect = Input.GetKey(KeyCode.LeftControl);
 
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			if (Physics.Raycast(ray, out RaycastHit hit, 100.0f, audioSourceLayerMask))
+			var boxSelection = boxSelector.SelectedObjects;
+			if (boxSelection.Count > 0)
 			{
-				var audioSourceController = hit.collider.gameObject.GetComponentInParent<AudioSourceController>();
-				if (audioSourceController)
+				if (!multiSelect)
 				{
-					if (!multiSelect)
+					for (int i = selectedControllers.Count - 1; i >= 0; i--)
 					{
-						for (int i = selectedControllers.Count - 1; i >= 0; i--)
-						{
-							selectedControllers[i].EnableInfoPanel(false);
-							selectedControllers.Remove(selectedControllers[i]);
-						}
+						selectedControllers[i].EnableInfoPanel(false);
+						selectedControllers.Remove(selectedControllers[i]);
 					}
+				}
 
-					if (!selectedControllers.Contains(audioSourceController))
+				foreach (var o in boxSelection)
+				{
+					var audioSourceController = o.GetComponent<AudioSourceController>();
+					if (audioSourceController)
 					{
+						audioSourceController.EnableInfoPanel(true);
 						selectedControllers.Add(audioSourceController);
 					}
-
-					audioSourceController.EnableInfoPanel(true);
 				}
 			}
 		}
