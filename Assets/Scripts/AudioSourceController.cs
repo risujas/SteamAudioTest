@@ -1,15 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class AudioSourceController : MonoBehaviour
 {
 	[SerializeField] private float loopInterval = 1.0f;
 
-	private AudioSource audioSource;
+	[Header("Info Panel")]
+	[SerializeField] private Canvas canvas;
+	[SerializeField] private TextMeshProUGUI clipNameText;
 
+	private AudioSource audioSource;
 	private float finishTime = 0.0f;
 	private bool started = false;
+
+	private bool isSelected;
+	public bool IsSelected
+	{
+		get { return isSelected; }
+		set
+		{
+			isSelected = value;
+			canvas.gameObject.SetActive(isSelected);
+		}
+	}
 
 	private void Start()
 	{
@@ -33,6 +48,13 @@ public class AudioSourceController : MonoBehaviour
 		{
 			audioSource.Play();
 			started = true;
+		}
+
+		if (IsSelected)
+		{
+			canvas.transform.LookAt(Camera.main.transform);
+
+			clipNameText.text = audioSource.clip.name;
 		}
 	}
 }

@@ -12,6 +12,7 @@ public class AudioSourceMover : MonoBehaviour
 	[SerializeField] private float sourceHeightAdjustSpeed = 3.0f;
 
 	private GameObject selectedGameObject;
+	private AudioSourceController selectedController;
 
 	public GameObject SelectedGameObject => selectedGameObject;
 
@@ -26,15 +27,17 @@ public class AudioSourceMover : MonoBehaviour
 			{
 				if (Physics.Raycast(ray, out hit, 100.0f, audioSourceLayerMask))
 				{
-					AudioSource audioSource = hit.collider.gameObject.GetComponentInParent<AudioSource>();
-					if (audioSource)
+					selectedController = hit.collider.gameObject.GetComponentInParent<AudioSourceController>();
+					if (selectedController)
 					{
-						selectedGameObject = audioSource.gameObject;
+						selectedGameObject = selectedController.gameObject;
+						selectedController.IsSelected = true;
 					}
 				}
 			}
 			else
 			{
+				selectedController.IsSelected = false;
 				selectedGameObject = null;
 			}
 		}
