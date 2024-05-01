@@ -73,6 +73,11 @@ public class AudioSourceController : MonoBehaviour
 			{
 				audioSource.clip = audioSourceManager.GetNextClip(audioSource.clip);
 			}
+
+			if (Input.GetKeyDown(KeyCode.Delete))
+			{
+				Destroy(gameObject);
+			}
 		}
 	}
 

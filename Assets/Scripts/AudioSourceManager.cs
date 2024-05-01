@@ -60,7 +60,11 @@ public class AudioSourceManager : MonoBehaviour
 				{
 					for (int i = selectedControllers.Count - 1; i >= 0; i--)
 					{
-						selectedControllers[i].EnableInfoPanel(false);
+						if (selectedControllers[i] != null)
+						{
+							selectedControllers[i].EnableInfoPanel(false);
+						}
+
 						selectedControllers.Remove(selectedControllers[i]);
 					}
 				}

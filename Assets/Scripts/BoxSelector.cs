@@ -10,8 +10,10 @@ public class BoxSelector : MonoBehaviour
 	private Vector3 initialMousePosition;
 	private Vector3 currentMousePosition;
 
-	private List<GameObject> selectedObjects = new List<GameObject>();
-	public IReadOnlyList<GameObject> SelectedObjects => selectedObjects.AsReadOnly();
+	public List<GameObject> SelectedObjects
+	{
+		get; private set;
+	}
 
 	private bool IsInsideSelectionBox(Vector3 objectScreenPos, Vector3 minScreenPos, Vector3 maxScreenPos)
 	{
@@ -29,16 +31,16 @@ public class BoxSelector : MonoBehaviour
 
 			if (IsInsideSelectionBox(objectScreenPos, minScreenPos, maxScreenPos))
 			{
-				if (!selectedObjects.Contains(obj))
+				if (!SelectedObjects.Contains(obj))
 				{
-					selectedObjects.Add(obj);
+					SelectedObjects.Add(obj);
 				}
 			}
 			else
 			{
-				if (selectedObjects.Contains(obj))
+				if (SelectedObjects.Contains(obj))
 				{
-					selectedObjects.Remove(obj);
+					SelectedObjects.Remove(obj);
 				}
 			}
 		}
@@ -78,6 +80,8 @@ public class BoxSelector : MonoBehaviour
 
 	private void Update()
 	{
+		SelectedObjects = new List<GameObject>();
+
 		HandleInput();
 	}
 }
