@@ -29,6 +29,31 @@ public class AudioSourceController : MonoBehaviour
 		panel.gameObject.SetActive(enabled);
 	}
 
+	private void ControlPlayback()
+	{
+		if (!audioSource.isPlaying && started)
+		{
+			finishTime = Time.time;
+			started = false;
+		}
+
+		if (audioSource.loop && Time.time > finishTime + loopInterval && !started)
+		{
+			audioSource.Play();
+			started = true;
+		}
+	}
+
+	private void UpdateInfoPanel()
+	{
+		if (panel.gameObject.activeInHierarchy)
+		{
+			panel.transform.position = Camera.main.WorldToScreenPoint(audioSource.transform.position);
+			clipNameText.text = "Clip: " + audioSource.clip.name;
+			distanceText.text = string.Format("Distance: {0:0.00}m", Vector3.Distance(audioSource.transform.position, audioListener.transform.position));
+		}
+	}
+
 	private void Start()
 	{
 		audioSource = GetComponent<AudioSource>();
@@ -42,23 +67,7 @@ public class AudioSourceController : MonoBehaviour
 
 	private void Update()
 	{
-		if (!audioSource.isPlaying && started)
-		{
-			finishTime = Time.time;
-			started = false;
-		}
-
-		if (Time.time > finishTime + loopInterval && !started)
-		{
-			audioSource.Play();
-			started = true;
-		}
-
-		if (panel.gameObject.activeInHierarchy)
-		{
-			panel.transform.position = Camera.main.WorldToScreenPoint(audioSource.transform.position);
-			clipNameText.text = "Clip: " + audioSource.clip.name;
-			distanceText.text = string.Format("Distance: {0:0.00}m", Vector3.Distance(audioSource.transform.position, audioListener.transform.position));
-		}
+		ControlPlayback();
+		UpdateInfoPanel();
 	}
 }
