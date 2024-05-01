@@ -67,6 +67,11 @@ PrefabInstance:
       propertyPath: selectableLayers.m_Bits
       value: 1024
       objectReference: {fileID: 0}
+    - target: {fileID: 67073036176028397, guid: fb31a337f677e03498394cb98e053f22,
+        type: 3}
+      propertyPath: minMouseDistanceForBoxSelection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 951039251411589693, guid: fb31a337f677e03498394cb98e053f22,
         type: 3}
       propertyPath: m_LocalPosition.x

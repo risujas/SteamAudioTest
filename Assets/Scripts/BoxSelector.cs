@@ -6,13 +6,27 @@ public class BoxSelector : MonoBehaviour
 {
 	[SerializeField] private LayerMask selectableLayers;
 	[SerializeField] private RectTransform panel;
+	[SerializeField] private float minTimeForBoxSelection = 0.1f;
+	[SerializeField] private float minMouseDistanceForBoxSelection = 1.0f;
 
 	private Vector3 initialMousePosition;
 	private Vector3 currentMousePosition;
 
+	private float startTime;
+
 	public List<GameObject> SelectedObjects
 	{
 		get; private set;
+	}
+
+	private bool UsingBoxSelection
+	{
+		get
+		{
+			float elapsedTime = Time.time - startTime;
+			float mouseDistance = Vector3.Distance(initialMousePosition, currentMousePosition);
+			return elapsedTime >= minTimeForBoxSelection && mouseDistance >= minMouseDistanceForBoxSelection;
+		}
 	}
 
 	private bool IsInsideSelectionBox(Vector3 objectScreenPos, Vector3 minScreenPos, Vector3 maxScreenPos)
@@ -20,8 +34,10 @@ public class BoxSelector : MonoBehaviour
 		return (objectScreenPos.x >= minScreenPos.x && objectScreenPos.x <= maxScreenPos.x) && (objectScreenPos.y >= minScreenPos.y && objectScreenPos.y <= maxScreenPos.y);
 	}
 
-	private void FinalizeSelection()
+	private void SelectWithBox()
 	{
+		Debug.Log("Selecting with a box");
+
 		Vector3 minScreenPos = Vector3.Min(initialMousePosition, currentMousePosition);
 		Vector3 maxScreenPos = Vector3.Max(initialMousePosition, currentMousePosition);
 
@@ -48,20 +64,44 @@ public class BoxSelector : MonoBehaviour
 		panel.gameObject.SetActive(false);
 	}
 
+	private void SelectWithRaycast()
+	{
+		Debug.Log("Selecting with a raycast");
+
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+		if (Physics.Raycast(ray, out RaycastHit hit, 100.0f, selectableLayers))
+		{
+			SelectedObjects.Add(hit.collider.gameObject);
+		}
+	}
+
 	private void HandleInput()
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
 			initialMousePosition = Input.mousePosition;
+			startTime = Time.time;
 		}
 		else if (Input.GetMouseButton(0))
 		{
 			currentMousePosition = Input.mousePosition;
-			UpdateTransform();
+
+			if (UsingBoxSelection)
+			{
+				UpdateTransform();
+			}
 		}
 		else if (Input.GetMouseButtonUp(0))
 		{
-			FinalizeSelection();
+			if (UsingBoxSelection)
+			{
+				SelectWithBox();
+			}
+			else
+			{
+				SelectWithRaycast();
+			}
 		}
 	}
 
