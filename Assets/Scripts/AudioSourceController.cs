@@ -6,7 +6,7 @@ using UnityEngine;
 public class AudioSourceController : MonoBehaviour
 {
 	[SerializeField] private float loopInterval = 1.0f;
-	[SerializeField] private float dragSpeed = 1.0f;
+	[SerializeField] private float dragSpeed = 3.0f;
 
 	[Header("Info Panel")]
 	[SerializeField] private RectTransform panel;

@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loopInterval: 1
-  dragSpeed: 1
+  dragSpeed: 3
   panel: {fileID: 6978672150105415442}
   clipNameText: {fileID: 7859706359015382144}
   distanceText: {fileID: 4177956565450958298}
