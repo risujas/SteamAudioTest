@@ -43,6 +43,7 @@ public class AudioSourceMover : MonoBehaviour
 
 		if (selectedGameObject)
 		{
+			/*
 			if (Physics.Raycast(ray, out hit, 100.0f, groundLayerMask))
 			{
 				selectedGameObject.transform.position = new(hit.point.x, selectedGameObject.transform.position.y, hit.point.z);
@@ -52,6 +53,7 @@ public class AudioSourceMover : MonoBehaviour
 			selectedGameObject.transform.position += Vector3.up * input * sourceHeightAdjustSpeed;
 			float y = Mathf.Clamp(selectedGameObject.transform.position.y, minSourceHeight, maxSourceHeight);
 			selectedGameObject.transform.position = new(selectedGameObject.transform.position.x, y, selectedGameObject.transform.position.z);
+			*/
 		}
 	}
 }
