@@ -46,7 +46,7 @@ public class AudioSourceManager : MonoBehaviour
 		return availableClips[index];
 	}
 
-	private void Update()
+	private void HandleInput()
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
@@ -76,5 +76,10 @@ public class AudioSourceManager : MonoBehaviour
 				}
 			}
 		}
+	}
+
+	private void Update()
+	{
+		HandleInput();
 	}
 }
