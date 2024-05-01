@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioSourceController : MonoBehaviour
 {
-	[SerializeField] private float interval = 1.0f;
+	[SerializeField] private float loopInterval = 1.0f;
 
 	private AudioSource audioSource;
 
@@ -14,6 +14,11 @@ public class AudioSourceController : MonoBehaviour
 	private void Start()
 	{
 		audioSource = GetComponent<AudioSource>();
+
+		if (audioSource.playOnAwake)
+		{
+			started = true;
+		}
 	}
 
 	private void Update()
@@ -24,7 +29,7 @@ public class AudioSourceController : MonoBehaviour
 			started = false;
 		}
 
-		if (Time.time > finishTime + interval && !started)
+		if (Time.time > finishTime + loopInterval && !started)
 		{
 			audioSource.Play();
 			started = true;
