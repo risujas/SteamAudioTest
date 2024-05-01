@@ -12,6 +12,21 @@ public class CameraControl : MonoBehaviour
 
 	private float desiredHeight;
 
+	private void HandleInput()
+	{
+		var input = Input.GetAxis("Mouse ScrollWheel");
+		desiredHeight += -input * Time.deltaTime * zoomSpeed;
+		desiredHeight = Mathf.Clamp(desiredHeight, minHeight, maxHeight);
+	}
+
+	private void Move()
+	{
+		Vector3 desiredPosition = new(transform.position.x, desiredHeight, transform.position.z);
+		transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * lerpSpeed);
+
+		transform.LookAt(targetObject.transform);
+	}
+
 	private void Start()
 	{
 		desiredHeight = transform.position.y;
@@ -19,13 +34,7 @@ public class CameraControl : MonoBehaviour
 
 	private void Update()
 	{
-		var input = Input.GetAxis("Mouse ScrollWheel");
-		desiredHeight += -input * Time.deltaTime * zoomSpeed;
-		desiredHeight = Mathf.Clamp(desiredHeight, minHeight, maxHeight);
-
-		Vector3 desiredPosition = new(transform.position.x, desiredHeight, transform.position.z);
-		transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * lerpSpeed);
-
-		transform.LookAt(targetObject.transform);
+		HandleInput();
+		Move();
 	}
 }
