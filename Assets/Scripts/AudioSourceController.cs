@@ -6,9 +6,9 @@ using UnityEngine;
 public class AudioSourceController : MonoBehaviour
 {
 	[SerializeField] private float loopInterval = 1.0f;
+	[SerializeField] private float dragSpeed = 1.0f;
 
 	[Header("Info Panel")]
-	[SerializeField] private Canvas canvas;
 	[SerializeField] private RectTransform panel;
 	[SerializeField] private TextMeshProUGUI clipNameText;
 	[SerializeField] private TextMeshProUGUI distanceText;
@@ -54,6 +54,14 @@ public class AudioSourceController : MonoBehaviour
 		}
 	}
 
+	private void HandleMovement()
+	{
+		if (Input.GetKey(KeyCode.M) && panel.gameObject.activeInHierarchy)
+		{
+			transform.position += new Vector3(Input.mousePositionDelta.x, 0.0f, Input.mousePositionDelta.y) * dragSpeed * Time.deltaTime;
+		}
+	}
+
 	private void Start()
 	{
 		audioSource = GetComponent<AudioSource>();
@@ -69,5 +77,6 @@ public class AudioSourceController : MonoBehaviour
 	{
 		ControlPlayback();
 		UpdateInfoPanel();
+		HandleMovement();
 	}
 }

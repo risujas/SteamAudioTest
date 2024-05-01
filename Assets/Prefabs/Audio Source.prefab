@@ -345,7 +345,7 @@ Transform:
   m_GameObject: {fileID: 8380571304265624548}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.7, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loopInterval: 1
-  canvas: {fileID: 7408327615052756068}
+  dragSpeed: 1
   panel: {fileID: 6978672150105415442}
   clipNameText: {fileID: 7859706359015382144}
   distanceText: {fileID: 4177956565450958298}
