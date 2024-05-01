@@ -16,15 +16,9 @@ public class AudioSourceController : MonoBehaviour
 	private float finishTime = 0.0f;
 	private bool started = false;
 
-	private bool isSelected;
-	public bool IsSelected
+	public void EnableInfoPanel(bool enabled)
 	{
-		get { return isSelected; }
-		set
-		{
-			isSelected = value;
-			canvas.gameObject.SetActive(isSelected);
-		}
+		panel.gameObject.SetActive(enabled);
 	}
 
 	private void Start()
@@ -51,7 +45,7 @@ public class AudioSourceController : MonoBehaviour
 			started = true;
 		}
 
-		if (IsSelected)
+		if (panel.gameObject.activeInHierarchy)
 		{
 			panel.transform.position = Camera.main.WorldToScreenPoint(audioSource.transform.position);
 			clipNameText.text = "Clip: " + audioSource.clip.name;

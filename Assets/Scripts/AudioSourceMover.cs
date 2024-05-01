@@ -31,13 +31,12 @@ public class AudioSourceMover : MonoBehaviour
 					if (selectedController)
 					{
 						selectedGameObject = selectedController.gameObject;
-						selectedController.IsSelected = true;
+						selectedController.EnableInfoPanel(true);
 					}
 				}
 			}
 			else
 			{
-				selectedController.IsSelected = false;
 				selectedGameObject = null;
 			}
 		}
