@@ -48,7 +48,7 @@ public class AudioSourceManager : MonoBehaviour
 
 	private void HandleInput()
 	{
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButtonUp(0))
 		{
 			bool multiSelect = Input.GetKey(KeyCode.LeftControl);
 
