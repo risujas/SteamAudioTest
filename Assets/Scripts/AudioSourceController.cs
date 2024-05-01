@@ -15,6 +15,7 @@ public class AudioSourceController : MonoBehaviour
 
 	private AudioSource audioSource;
 	private AudioListener audioListener;
+	private AudioSourceManager audioSourceManager;
 
 	private float finishTime = 0.0f;
 	private bool started = false;
@@ -54,18 +55,33 @@ public class AudioSourceController : MonoBehaviour
 		}
 	}
 
-	private void HandleMovement()
+	private void HandleInput()
 	{
-		if (Input.GetKey(KeyCode.M) && panel.gameObject.activeInHierarchy)
+		if (panel.gameObject.activeInHierarchy)
 		{
-			transform.position += new Vector3(Input.mousePositionDelta.x, 0.0f, Input.mousePositionDelta.y) * dragSpeed * Time.deltaTime;
+			if (Input.GetKey(KeyCode.M))
+			{
+				transform.position += new Vector3(Input.mousePositionDelta.x, 0.0f, Input.mousePositionDelta.y) * dragSpeed * Time.deltaTime;
+			}
+
+			if (Input.GetKeyDown(KeyCode.LeftArrow))
+			{
+				audioSource.clip = audioSourceManager.GetPreviousClip(audioSource.clip);
+			}
+
+			if (Input.GetKeyDown(KeyCode.RightArrow))
+			{
+				audioSource.clip = audioSourceManager.GetNextClip(audioSource.clip);
+			}
 		}
 	}
 
 	private void Start()
 	{
 		audioSource = GetComponent<AudioSource>();
+
 		audioListener = GameObject.FindGameObjectWithTag("AudioListener").GetComponent<AudioListener>();
+		audioSourceManager = GameObject.FindGameObjectWithTag("AudioSourceManager").GetComponent<AudioSourceManager>();
 
 		if (audioSource.playOnAwake)
 		{
@@ -77,6 +93,6 @@ public class AudioSourceController : MonoBehaviour
 	{
 		ControlPlayback();
 		UpdateInfoPanel();
-		HandleMovement();
+		HandleInput();
 	}
 }

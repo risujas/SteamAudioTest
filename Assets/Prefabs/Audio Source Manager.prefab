@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8031836632516923443}
   - component: {fileID: 9189558627559487533}
   m_Layer: 0
-  m_Name: Audio Source Selector
-  m_TagString: Untagged
+  m_Name: Audio Source Manager
+  m_TagString: AudioSourceManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,3 +47,8 @@ MonoBehaviour:
   audioSourceLayerMask:
     serializedVersion: 2
     m_Bits: 1024
+  availableClips:
+  - {fileID: 8300000, guid: 85edce24b350d2545bf0e4d0ae425d74, type: 3}
+  - {fileID: 8300000, guid: 0c7756e6da6454e4cb97c2d15c0ebaa0, type: 3}
+  - {fileID: 8300000, guid: 47533052773913342a5b388d10bba53c, type: 3}
+  - {fileID: 8300000, guid: 67b1ed6bf2095e0479a11a7386b27be2, type: 3}
