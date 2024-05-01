@@ -5,6 +5,7 @@ using UnityEngine;
 public class BoxSelector : MonoBehaviour
 {
 	[SerializeField] private LayerMask selectableLayers;
+	[SerializeField] private RectTransform panel;
 
 	private Vector3 initialMousePosition;
 	private Vector3 currentMousePosition;
@@ -41,6 +42,8 @@ public class BoxSelector : MonoBehaviour
 				}
 			}
 		}
+
+		panel.gameObject.SetActive(false);
 	}
 
 	private void HandleInput()
@@ -52,11 +55,25 @@ public class BoxSelector : MonoBehaviour
 		else if (Input.GetMouseButton(0))
 		{
 			currentMousePosition = Input.mousePosition;
+			UpdateTransform();
 		}
 		else if (Input.GetMouseButtonUp(0))
 		{
 			FinalizeSelection();
 		}
+	}
+
+	private void UpdateTransform()
+	{
+		if (!panel.gameObject.activeSelf)
+		{
+			panel.gameObject.SetActive(true);
+		}
+
+		float width = currentMousePosition.x - initialMousePosition.x;
+		float height = currentMousePosition.y - initialMousePosition.y;
+
+		// :thinking:
 	}
 
 	private void Update()
