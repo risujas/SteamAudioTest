@@ -9,6 +9,7 @@ public class AudioSourceController : MonoBehaviour
 
 	[Header("Info Panel")]
 	[SerializeField] private Canvas canvas;
+	[SerializeField] private RectTransform panel;
 	[SerializeField] private TextMeshProUGUI clipNameText;
 
 	private AudioSource audioSource;
@@ -52,9 +53,8 @@ public class AudioSourceController : MonoBehaviour
 
 		if (IsSelected)
 		{
-			canvas.transform.LookAt(Camera.main.transform);
-
-			clipNameText.text = audioSource.clip.name;
+			panel.transform.position = Camera.main.WorldToScreenPoint(audioSource.transform.position);
+			clipNameText.text = "Clip: " + audioSource.clip.name;
 		}
 	}
 }
