@@ -38,7 +38,7 @@ public class AudioSourceController : MonoBehaviour
 			started = false;
 		}
 
-		if (audioSource.loop && Time.time > finishTime + loopInterval && !started)
+		if (Time.time > finishTime + loopInterval && !started)
 		{
 			audioSource.Play();
 			started = true;
