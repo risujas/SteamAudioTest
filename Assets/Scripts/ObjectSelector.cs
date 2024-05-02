@@ -1,17 +1,16 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ObjectSelector : MonoBehaviour
 {
-	[SerializeField] private LayerMask selectableLayers;
-	[SerializeField] private RectTransform panel;
+	[SerializeField] private LayerMask selectionLayers;
+	[SerializeField] private RectTransform boxSelectorIndicatorPanel;
 	[SerializeField] private float minTimeForBoxSelection = 0.1f;
 	[SerializeField] private float minMouseDistanceForBoxSelection = 1.0f;
 
 	private Vector3 initialMousePosition;
 	private Vector3 currentMousePosition;
-
 	private float startTime;
 	private bool selecting;
 
@@ -47,7 +46,7 @@ public class ObjectSelector : MonoBehaviour
 
 		foreach (GameObject obj in FindObjectsByType(typeof(GameObject), FindObjectsSortMode.None))
 		{
-			if ((selectableLayers & (1 << obj.layer)) == 0)
+			if ((selectionLayers & (1 << obj.layer)) == 0)
 			{
 				continue;
 			}
@@ -71,14 +70,14 @@ public class ObjectSelector : MonoBehaviour
 		}
 
 		CompletedSelection = true;
-		panel.gameObject.SetActive(false);
+		boxSelectorIndicatorPanel.gameObject.SetActive(false);
 	}
 
 	private void SelectWithRaycast()
 	{
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-		if (Physics.Raycast(ray, out RaycastHit hit, 100.0f, selectableLayers))
+		if (Physics.Raycast(ray, out RaycastHit hit, 100.0f, selectionLayers))
 		{
 			SelectedObjects.Add(hit.collider.gameObject);
 		}
@@ -99,13 +98,16 @@ public class ObjectSelector : MonoBehaviour
 		{
 			if (Input.GetMouseButtonUp(0))
 			{
-				if (UsingBoxSelection)
+				if (!EventSystem.current.IsPointerOverGameObject())
 				{
-					SelectWithBox();
-				}
-				else
-				{
-					SelectWithRaycast();
+					if (UsingBoxSelection)
+					{
+						SelectWithBox();
+					}
+					else
+					{
+						SelectWithRaycast();
+					}
 				}
 
 				selecting = false;
@@ -125,7 +127,7 @@ public class ObjectSelector : MonoBehaviour
 
 	private void UpdateBoxVisuals()
 	{
-		panel.gameObject.SetActive(selecting);
+		boxSelectorIndicatorPanel.gameObject.SetActive(selecting);
 
 		float width = currentMousePosition.x - initialMousePosition.x;
 		float height = currentMousePosition.y - initialMousePosition.y;

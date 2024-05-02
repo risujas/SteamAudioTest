@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1563017217694265127}
   - component: {fileID: 7705471956266050118}
   - component: {fileID: 2973845984124436082}
-  m_Layer: 10
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 6851922837178462584}
   - component: {fileID: 6397928667684353208}
   - component: {fileID: 6286921744522099434}
-  m_Layer: 10
+  m_Layer: 5
   m_Name: Distance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 1017125224269594658}
   - component: {fileID: 8927742100208094231}
   - component: {fileID: 8941432736473134556}
-  m_Layer: 10
+  m_Layer: 5
   m_Name: Audio Source Info Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 7760844706946632684}
   - component: {fileID: 2323340722217722090}
   - component: {fileID: 276969256806089648}
-  m_Layer: 10
+  m_Layer: 5
   m_Name: ClipName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -498,7 +498,7 @@ GameObject:
   - component: {fileID: 2115057558381122174}
   - component: {fileID: 349198217983242378}
   - component: {fileID: 1660963349627703776}
-  m_Layer: 10
+  m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
