@@ -47,6 +47,22 @@ public class AudioSourceManager : MonoBehaviour
 		return availableClips[index];
 	}
 
+	private void DeselectControllers()
+	{
+		if (selectedControllers != null && selectedControllers.Count > 0)
+		{
+			for (int i = selectedControllers.Count - 1; i >= 0; i--)
+			{
+				if (selectedControllers[i] != null)
+				{
+					selectedControllers[i].EnableInfoPanel(false);
+				}
+
+				selectedControllers.Remove(selectedControllers[i]);
+			}
+		}
+	}
+
 	private void HandleInput()
 	{
 		if (Input.GetMouseButtonUp(0))
@@ -58,15 +74,7 @@ public class AudioSourceManager : MonoBehaviour
 			{
 				if (!multiSelect)
 				{
-					for (int i = selectedControllers.Count - 1; i >= 0; i--)
-					{
-						if (selectedControllers[i] != null)
-						{
-							selectedControllers[i].EnableInfoPanel(false);
-						}
-
-						selectedControllers.Remove(selectedControllers[i]);
-					}
+					DeselectControllers();
 				}
 
 				foreach (var o in boxSelection)
@@ -78,6 +86,10 @@ public class AudioSourceManager : MonoBehaviour
 						selectedControllers.Add(audioSourceController);
 					}
 				}
+			}
+			else
+			{
+				DeselectControllers();
 			}
 		}
 	}
