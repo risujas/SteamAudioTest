@@ -7,6 +7,7 @@ public class AudioSourceController : MonoBehaviour
 {
 	[SerializeField] private float loopInterval = 1.0f;
 	[SerializeField] private float dragSpeed = 3.0f;
+	[SerializeField] private MeshRenderer audioVisualizerRenderer;
 
 	[Header("Info Panel")]
 	[SerializeField] private RectTransform panel;
@@ -16,6 +17,9 @@ public class AudioSourceController : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI heightPanel;
 
 	private AudioSource audioSource;
+	private AudioLoudnessChecker audioLoudnessChecker;
+	private Material audioVisualizerMaterial;
+
 	private AudioListener audioListener;
 	private AudioSourceManager audioSourceManager;
 
@@ -96,9 +100,17 @@ public class AudioSourceController : MonoBehaviour
 		}
 	}
 
+	private void VisualizeAudio()
+	{
+		Color targetColor = Color32.Lerp(Color.white, Color.red, audioLoudnessChecker.NormalizedLoudness);
+		audioVisualizerMaterial.color = targetColor;
+	}
+
 	private void Start()
 	{
 		audioSource = GetComponent<AudioSource>();
+		audioLoudnessChecker = GetComponent<AudioLoudnessChecker>();
+		audioVisualizerMaterial = audioVisualizerRenderer.material;
 
 		audioListener = GameObject.FindGameObjectWithTag("AudioListener").GetComponent<AudioListener>();
 		audioSourceManager = GameObject.FindGameObjectWithTag("AudioSourceManager").GetComponent<AudioSourceManager>();
@@ -114,5 +126,6 @@ public class AudioSourceController : MonoBehaviour
 		ControlPlayback();
 		UpdateInfoPanel();
 		HandleInput();
+		VisualizeAudio();
 	}
 }
