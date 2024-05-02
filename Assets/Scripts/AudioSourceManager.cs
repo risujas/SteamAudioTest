@@ -7,7 +7,7 @@ public class AudioSourceManager : MonoBehaviour
 {
 	[SerializeField] private LayerMask audioSourceLayerMask;
 	[SerializeField] private List<AudioClip> availableClips;
-	[SerializeField] private BoxSelector boxSelector;
+	[SerializeField] private ObjectSelector objectSelector;
 
 	private List<AudioSourceController> selectedControllers = new List<AudioSourceController>();
 
@@ -69,7 +69,7 @@ public class AudioSourceManager : MonoBehaviour
 		{
 			bool multiSelect = Input.GetKey(KeyCode.LeftControl);
 
-			var boxSelection = boxSelector.SelectedObjects;
+			var boxSelection = objectSelector.SelectedObjects;
 			if (boxSelection.Count > 0)
 			{
 				if (!multiSelect)

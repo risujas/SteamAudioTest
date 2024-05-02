@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BoxSelector : MonoBehaviour
+public class ObjectSelector : MonoBehaviour
 {
 	[SerializeField] private LayerMask selectableLayers;
 	[SerializeField] private RectTransform panel;
