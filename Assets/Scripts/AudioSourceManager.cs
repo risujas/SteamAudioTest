@@ -65,19 +65,19 @@ public class AudioSourceManager : MonoBehaviour
 
 	private void HandleInput()
 	{
-		if (Input.GetMouseButtonUp(0))
+		if (objectSelector.CompletedSelection)
 		{
 			bool multiSelect = Input.GetKey(KeyCode.LeftControl);
 
-			var boxSelection = objectSelector.SelectedObjects;
-			if (boxSelection.Count > 0)
+			var selection = objectSelector.SelectedObjects;
+			if (selection.Count > 0)
 			{
 				if (!multiSelect)
 				{
 					DeselectControllers();
 				}
 
-				foreach (var o in boxSelection)
+				foreach (var o in selection)
 				{
 					var audioSourceController = o.GetComponent<AudioSourceController>();
 					if (audioSourceController == null) audioSourceController = o.GetComponentInParent<AudioSourceController>();

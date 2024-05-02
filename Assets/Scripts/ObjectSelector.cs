@@ -15,6 +15,11 @@ public class ObjectSelector : MonoBehaviour
 	private float startTime;
 	private bool selecting;
 
+	public bool CompletedSelection
+	{
+		get; private set;
+	}
+
 	public List<GameObject> SelectedObjects
 	{
 		get; private set;
@@ -65,6 +70,7 @@ public class ObjectSelector : MonoBehaviour
 			}
 		}
 
+		CompletedSelection = true;
 		panel.gameObject.SetActive(false);
 	}
 
@@ -76,6 +82,8 @@ public class ObjectSelector : MonoBehaviour
 		{
 			SelectedObjects.Add(hit.collider.gameObject);
 		}
+
+		CompletedSelection = true;
 	}
 
 	private void HandleInput()
@@ -128,6 +136,7 @@ public class ObjectSelector : MonoBehaviour
 	private void Update()
 	{
 		SelectedObjects = new List<GameObject>();
+		CompletedSelection = false;
 
 		HandleInput();
 	}
