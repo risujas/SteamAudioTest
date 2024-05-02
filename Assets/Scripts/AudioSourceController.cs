@@ -13,6 +13,7 @@ public class AudioSourceController : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI clipNameText;
 	[SerializeField] private TextMeshProUGUI distanceText;
 	[SerializeField] private TextMeshProUGUI volumeText;
+	[SerializeField] private TextMeshProUGUI heightPanel;
 
 	private AudioSource audioSource;
 	private AudioListener audioListener;
@@ -60,6 +61,7 @@ public class AudioSourceController : MonoBehaviour
 			clipNameText.text = string.Format("Clip: {0}", audioSource.clip.name);
 			distanceText.text = string.Format("Distance: {0:0.00}m", Vector3.Distance(audioSource.transform.position, audioListener.transform.position));
 			volumeText.text = string.Format("Volume: {0:0.0}", audioSource.volume);
+			heightPanel.text = string.Format("Relative height: {0:0.0}m", audioSource.transform.position.y - audioListener.transform.position.y);
 		}
 	}
 
