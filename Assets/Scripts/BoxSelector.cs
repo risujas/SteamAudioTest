@@ -13,6 +13,7 @@ public class BoxSelector : MonoBehaviour
 	private Vector3 currentMousePosition;
 
 	private float startTime;
+	private bool selecting;
 
 	public List<GameObject> SelectedObjects
 	{
@@ -78,39 +79,44 @@ public class BoxSelector : MonoBehaviour
 
 	private void HandleInput()
 	{
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButtonDown(0) && !selecting)
 		{
 			initialMousePosition = Input.mousePosition;
 			startTime = Time.time;
+			selecting = true;
 		}
-		else if (Input.GetMouseButton(0))
-		{
-			currentMousePosition = Input.mousePosition;
 
-			if (UsingBoxSelection)
-			{
-				UpdateTransform();
-			}
-		}
-		else if (Input.GetMouseButtonUp(0))
+		if (selecting)
 		{
-			if (UsingBoxSelection)
+			if (Input.GetMouseButtonUp(0))
 			{
-				SelectWithBox();
+				if (UsingBoxSelection)
+				{
+					SelectWithBox();
+				}
+				else
+				{
+					SelectWithRaycast();
+				}
+
+				selecting = false;
 			}
-			else
+
+			else if (Input.GetMouseButton(0))
 			{
-				SelectWithRaycast();
+				currentMousePosition = Input.mousePosition;
+
+				if (UsingBoxSelection)
+				{
+					UpdateBoxVisuals();
+				}
 			}
 		}
 	}
 
-	private void UpdateTransform()
+	private void UpdateBoxVisuals()
 	{
-		if (!panel.gameObject.activeSelf)
-		{
-			panel.gameObject.SetActive(true);
-		}
+		panel.gameObject.SetActive(selecting);
 
 		float width = currentMousePosition.x - initialMousePosition.x;
 		float height = currentMousePosition.y - initialMousePosition.y;
