@@ -1,5 +1,4 @@
 Box select (Visual WIP)
-Height adjustment
 Volume control
 Pause/play
 Pause/play all

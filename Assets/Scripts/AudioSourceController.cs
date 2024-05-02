@@ -12,6 +12,7 @@ public class AudioSourceController : MonoBehaviour
 	[SerializeField] private RectTransform panel;
 	[SerializeField] private TextMeshProUGUI clipNameText;
 	[SerializeField] private TextMeshProUGUI distanceText;
+	[SerializeField] private TextMeshProUGUI volumeText;
 
 	private AudioSource audioSource;
 	private AudioListener audioListener;
@@ -19,6 +20,11 @@ public class AudioSourceController : MonoBehaviour
 
 	private float finishTime = 0.0f;
 	private bool started = false;
+
+	public void ChangeVolume(float value)
+	{
+		audioSource.volume = Mathf.Clamp(audioSource.volume + value, 0.0f, 1.0f);
+	}
 
 	public void EnableInfoPanel(bool enabled)
 	{
@@ -50,8 +56,10 @@ public class AudioSourceController : MonoBehaviour
 		if (panel.gameObject.activeInHierarchy)
 		{
 			panel.transform.position = Camera.main.WorldToScreenPoint(audioSource.transform.position);
-			clipNameText.text = "Clip: " + audioSource.clip.name;
+
+			clipNameText.text = string.Format("Clip: {0}", audioSource.clip.name);
 			distanceText.text = string.Format("Distance: {0:0.00}m", Vector3.Distance(audioSource.transform.position, audioListener.transform.position));
+			volumeText.text = string.Format("Volume: {0:0.0}", audioSource.volume);
 		}
 	}
 
