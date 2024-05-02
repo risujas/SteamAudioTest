@@ -1,5 +1,3 @@
-Raycast vs box selection (currently bugged)
-
 Box select (Visual WIP)
 Height adjustment
 Volume control
