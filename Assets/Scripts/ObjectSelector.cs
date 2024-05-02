@@ -37,13 +37,16 @@ public class ObjectSelector : MonoBehaviour
 
 	private void SelectWithBox()
 	{
-		Debug.Log("Selecting with a box");
-
 		Vector3 minScreenPos = Vector3.Min(initialMousePosition, currentMousePosition);
 		Vector3 maxScreenPos = Vector3.Max(initialMousePosition, currentMousePosition);
 
 		foreach (GameObject obj in FindObjectsByType(typeof(GameObject), FindObjectsSortMode.None))
 		{
+			if ((selectableLayers & (1 << obj.layer)) == 0)
+			{
+				continue;
+			}
+
 			Vector3 objectScreenPos = Camera.main.WorldToScreenPoint(obj.transform.position);
 
 			if (IsInsideSelectionBox(objectScreenPos, minScreenPos, maxScreenPos))
@@ -67,8 +70,6 @@ public class ObjectSelector : MonoBehaviour
 
 	private void SelectWithRaycast()
 	{
-		Debug.Log("Selecting with a raycast");
-
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
 		if (Physics.Raycast(ray, out RaycastHit hit, 100.0f, selectableLayers))
