@@ -1,5 +1,4 @@
 Box select (Visual WIP)
-Volume control
 Pause/play
 Pause/play all
 Orbit around listener
