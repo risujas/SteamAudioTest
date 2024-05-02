@@ -80,6 +80,8 @@ public class AudioSourceManager : MonoBehaviour
 				foreach (var o in boxSelection)
 				{
 					var audioSourceController = o.GetComponent<AudioSourceController>();
+					if (audioSourceController == null) audioSourceController = o.GetComponentInParent<AudioSourceController>();
+
 					if (audioSourceController)
 					{
 						audioSourceController.EnableInfoPanel(true);
