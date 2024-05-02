@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using NUnit.Framework.Interfaces;
 using UnityEngine;
 
@@ -6,7 +7,9 @@ public class AudioLoudnessChecker : MonoBehaviour
 	[SerializeField] private AudioSource audioSource;
 	[SerializeField] private float updateStep = 0.1f;
 	[SerializeField] private int sampleDataLength = 1024;
+	[SerializeField] private float peakLoudnessUpdates = 32;
 
+	private List<float> loudnessValues = new List<float>();
 	private float peakLoudness = 0.0f;
 
 	private float currentUpdateTime = 0f;
@@ -18,7 +21,7 @@ public class AudioLoudnessChecker : MonoBehaviour
 	{
 		get
 		{
-			return Mathf.Clamp01(Loudness / peakLoudness);
+			return peakLoudness == 0.0f ? 0.0f : Mathf.Clamp01(Loudness / peakLoudness);
 		}
 	}
 
@@ -37,11 +40,29 @@ public class AudioLoudnessChecker : MonoBehaviour
 			}
 
 			Loudness /= sampleDataLength;
-			if (Loudness >= peakLoudness)
+
+			HandlePeakLoudness();
+		}
+	}
+
+	private void HandlePeakLoudness()
+	{
+		loudnessValues.Add(Loudness);
+		if (loudnessValues.Count > peakLoudnessUpdates)
+		{
+			loudnessValues.RemoveAt(0);
+		}
+
+		float highest = 0.0f;
+		foreach (var x in loudnessValues)
+		{
+			if (x > highest)
 			{
-				peakLoudness = Loudness;
+				highest = x;
 			}
 		}
+
+		peakLoudness = highest;
 	}
 
 	private void Awake()
