@@ -83,6 +83,13 @@ public class AudioSourceController : MonoBehaviour
 				transform.position += new Vector3(0.0f, Input.mousePositionDelta.y, 0.0f) * dragSpeed * Time.deltaTime;
 			}
 
+			if (Input.GetKey(KeyCode.R))
+			{
+				transform.LookAt(audioListener.transform);
+				Vector3 crossProduct = Vector3.Cross(transform.forward, Vector3.up);
+				transform.position += Input.mousePositionDelta.x * crossProduct * dragSpeed * Time.deltaTime;
+			}
+
 			if (Input.GetKeyDown(KeyCode.LeftArrow))
 			{
 				audioSource.clip = audioSourceManager.GetPreviousClip(audioSource.clip);
