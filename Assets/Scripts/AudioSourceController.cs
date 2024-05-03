@@ -85,9 +85,9 @@ public class AudioSourceController : MonoBehaviour
 
 			if (Input.GetKey(KeyCode.R))
 			{
-				transform.LookAt(audioListener.transform);
-				Vector3 crossProduct = Vector3.Cross(transform.forward, Vector3.up);
-				transform.position += Input.mousePositionDelta.x * crossProduct * dragSpeed * Time.deltaTime;
+				Vector3 dir = (audioListener.transform.position - transform.position).normalized;
+				Vector3 cross = Vector3.Cross(dir, Vector3.up);
+				transform.position += Input.mousePositionDelta.x * cross * dragSpeed * Time.deltaTime;
 			}
 
 			if (Input.GetKeyDown(KeyCode.LeftArrow))
