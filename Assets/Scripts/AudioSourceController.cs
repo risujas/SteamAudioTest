@@ -64,14 +64,13 @@ public class AudioSourceController : MonoBehaviour
 			Vector3 cameraPos = Camera.main.transform.position;
 			cameraPos.y = transform.position.y;
 
-			Vector3 dir = (cameraPos - transform.position).normalized;
-			Vector3 cross = Vector3.Cross(dir, Vector3.up);
-
 			float xDif = transform.position.x - cameraPos.x;
-			float offsetDistance = 2.0f; // TODO improve
-			Vector3 offset = cross * offsetDistance * (xDif / Mathf.Abs(xDif));
+			float offset = panel.sizeDelta.x;
+			if (xDif < 0.0f) offset *= -1;
 
-			Vector3 targetPos = Camera.main.WorldToScreenPoint(audioSource.transform.position + offset);
+			Vector3 targetPos = Camera.main.WorldToScreenPoint(audioSource.transform.position);
+			targetPos.x += offset;
+
 			panel.transform.position = Vector3.Lerp(panel.transform.position, targetPos, Time.deltaTime * panelLerpSpeed);
 
 			clipNameText.text = string.Format("Clip: {0}", audioSource.clip.name);
