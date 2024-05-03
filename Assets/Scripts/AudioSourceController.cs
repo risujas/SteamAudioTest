@@ -23,6 +23,7 @@ public class AudioSourceController : MonoBehaviour
 	private AudioListener audioListener;
 	private AudioSourceManager audioSourceManager;
 
+	private float panelLerpSpeed = 8.0f;
 	private float finishTime = 0.0f;
 	private bool started = false;
 
@@ -60,7 +61,18 @@ public class AudioSourceController : MonoBehaviour
 	{
 		if (panel.gameObject.activeInHierarchy)
 		{
-			panel.transform.position = Camera.main.WorldToScreenPoint(audioSource.transform.position);
+			Vector3 cameraPos = Camera.main.transform.position;
+			cameraPos.y = transform.position.y;
+
+			Vector3 dir = (cameraPos - transform.position).normalized;
+			Vector3 cross = Vector3.Cross(dir, Vector3.up);
+
+			float xDif = transform.position.x - cameraPos.x;
+			float offsetDistance = 2.0f; // TODO improve
+			Vector3 offset = cross * offsetDistance * (xDif / Mathf.Abs(xDif));
+
+			Vector3 targetPos = Camera.main.WorldToScreenPoint(audioSource.transform.position + offset);
+			panel.transform.position = Vector3.Lerp(panel.transform.position, targetPos, Time.deltaTime * panelLerpSpeed);
 
 			clipNameText.text = string.Format("Clip: {0}", audioSource.clip.name);
 			distanceText.text = string.Format("Distance: {0:0.00}m", Vector3.Distance(audioSource.transform.position, audioListener.transform.position));
