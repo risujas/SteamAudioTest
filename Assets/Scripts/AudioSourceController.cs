@@ -15,6 +15,7 @@ public class AudioSourceController : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI distanceText;
 	[SerializeField] private TextMeshProUGUI volumeText;
 	[SerializeField] private TextMeshProUGUI heightPanel;
+	[SerializeField] private TextMeshProUGUI pauseText;
 
 	private AudioSource audioSource;
 	private AudioLoudnessChecker audioLoudnessChecker;
@@ -107,6 +108,7 @@ public class AudioSourceController : MonoBehaviour
 			distanceText.text = string.Format("Distance: {0:0.00}m", Vector3.Distance(audioSource.transform.position, audioListener.transform.position));
 			volumeText.text = string.Format("Volume: {0:0.0}", audioSource.volume);
 			heightPanel.text = string.Format("Relative height: {0:0.0}m", audioSource.transform.position.y - audioListener.transform.position.y);
+			pauseText.text = paused ? "Resume" : "Pause";
 		}
 	}
 

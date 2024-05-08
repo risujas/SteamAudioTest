@@ -474,6 +474,7 @@ MonoBehaviour:
   distanceText: {fileID: 4177956565450958298}
   volumeText: {fileID: 4567799310038080118}
   heightPanel: {fileID: 8174433290646337705}
+  pauseText: {fileID: 8152862467026583163}
 --- !u!114 &3691166147072120312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,6 +774,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 8413973413002171326, guid: 3357a73f40c52a143b5c986eb9760260,
+        type: 3}
+      propertyPath: m_Name
+      value: PauseText
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -811,6 +817,18 @@ RectTransform:
 --- !u!114 &7859706359015382144 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 276969256806089648, guid: 3357a73f40c52a143b5c986eb9760260,
+    type: 3}
+  m_PrefabInstance: {fileID: 7981706028903046960}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8152862467026583163 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2296974829391700299, guid: 3357a73f40c52a143b5c986eb9760260,
     type: 3}
   m_PrefabInstance: {fileID: 7981706028903046960}
   m_PrefabAsset: {fileID: 0}
