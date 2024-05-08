@@ -26,6 +26,31 @@ public class AudioSourceController : MonoBehaviour
 	private float panelLerpSpeed = 8.0f;
 	private float finishTime = 0.0f;
 	private bool started = false;
+	private bool paused = false;
+
+	public void PlayPreviousClip()
+	{
+		audioSource.clip = audioSourceManager.GetNextClip(audioSource.clip);
+	}
+
+	public void PlayNextClip()
+	{
+		audioSource.clip = audioSourceManager.GetPreviousClip(audioSource.clip);
+	}
+
+	public void TogglePause()
+	{
+		paused = !paused;
+
+		if (paused)
+		{
+			audioSource.Pause();
+		}
+		else
+		{
+			audioSource.UnPause();
+		}
+	}
 
 	public void ChangeVolume(float value)
 	{
@@ -44,6 +69,11 @@ public class AudioSourceController : MonoBehaviour
 
 	private void ControlPlayback()
 	{
+		if (paused)
+		{
+			return;
+		}
+
 		if (!audioSource.isPlaying && started)
 		{
 			finishTime = Time.time;
