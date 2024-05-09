@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -22,6 +23,8 @@ public class AudioSourceManager : MonoBehaviour
 	[SerializeField] private ObjectSelector objectSelector;
 
 	private List<AudioSourceController> selectedControllers = new List<AudioSourceController>();
+	private List<AudioSourceController> allControllers = new List<AudioSourceController>();
+
 	private GameObject placementIndicator;
 	private bool isPlacingController;
 	private bool isDeletingController;
@@ -90,7 +93,6 @@ public class AudioSourceManager : MonoBehaviour
 
 	public void PauseAllControllers(bool pause)
 	{
-		var allControllers = FindObjectsByType<AudioSourceController>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 		foreach (var controller in allControllers)
 		{
 			if (pause)
@@ -168,6 +170,9 @@ public class AudioSourceManager : MonoBehaviour
 				var ascParent = Instantiate(audioControllerPrefab, Vector3.zero, Quaternion.identity);
 
 				var controller = ascParent.GetComponentInChildren<AudioSourceController>();
+
+				allControllers.Add(controller);
+
 				controller.transform.position = hit.point + Vector3.up * 1.0f;
 
 				controller.EnableInfoPanel(true);
@@ -189,9 +194,11 @@ public class AudioSourceManager : MonoBehaviour
 			if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject())
 			{
 				var controller = hit.collider.gameObject.GetComponentInParent<AudioSourceController>();
+
+				allControllers.Remove(controller);
 				Destroy(controller.gameObject);
 
-				if (!Input.GetKey(KeyCode.LeftControl))
+				if (!Input.GetKey(KeyCode.LeftControl) || allControllers.Count == 0)
 				{
 					EnableDeletion(false);
 				}
@@ -243,5 +250,7 @@ public class AudioSourceManager : MonoBehaviour
 		{
 			HandleSelection();
 		}
+
+		allControllers = FindObjectsByType<AudioSourceController>(FindObjectsInactive.Include, FindObjectsSortMode.None).ToList();
 	}
 }
