@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class ObjectSelector : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class ObjectSelector : MonoBehaviour
 	private Vector3 currentMousePosition;
 	private float startTime;
 	private bool selecting;
+
+	private Controls controls;
 
 	public bool CompletedSelection
 	{
@@ -75,7 +78,7 @@ public class ObjectSelector : MonoBehaviour
 
 	private void SelectWithRaycast()
 	{
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 
 		if (Physics.Raycast(ray, out RaycastHit hit, 100.0f, selectionLayers))
 		{
@@ -87,35 +90,32 @@ public class ObjectSelector : MonoBehaviour
 
 	private void HandleInput()
 	{
-		if (Input.GetMouseButtonDown(0) && !selecting)
+		if (controls.Global.Select.triggered && !selecting)
 		{
-			initialMousePosition = Input.mousePosition;
+			initialMousePosition = Mouse.current.position.ReadValue();
 			startTime = Time.time;
 			selecting = true;
 		}
 
 		if (selecting)
 		{
-			if (Input.GetMouseButtonUp(0))
+			if (controls.Global.Select.WasReleasedThisFrame() && !EventSystem.current.IsPointerOverGameObject())
 			{
-				if (!EventSystem.current.IsPointerOverGameObject())
+				if (UsingBoxSelection)
 				{
-					if (UsingBoxSelection)
-					{
-						SelectWithBox();
-					}
-					else
-					{
-						SelectWithRaycast();
-					}
+					SelectWithBox();
+				}
+				else
+				{
+					SelectWithRaycast();
 				}
 
 				selecting = false;
 			}
 
-			else if (Input.GetMouseButton(0))
+			else if (controls.Global.Select.IsPressed())
 			{
-				currentMousePosition = Input.mousePosition;
+				currentMousePosition = Mouse.current.position.ReadValue();
 
 				if (UsingBoxSelection)
 				{
@@ -133,6 +133,12 @@ public class ObjectSelector : MonoBehaviour
 		float height = currentMousePosition.y - initialMousePosition.y;
 
 		// :thinking:
+	}
+
+	private void Awake()
+	{
+		controls = new Controls();
+		controls.Enable();
 	}
 
 	private void Update()
