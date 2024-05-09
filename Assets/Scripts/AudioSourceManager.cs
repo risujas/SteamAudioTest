@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class AudioSourceManager : MonoBehaviour
 {
@@ -128,6 +129,12 @@ public class AudioSourceManager : MonoBehaviour
 			if (Physics.Raycast(ray, out RaycastHit hit, 100.0f, placementSurfaceLayer))
 			{
 				placementIndicator.transform.position = hit.point;
+
+				if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+				{
+					Instantiate(audioControllerPrefab, hit.point + Vector3.up, Quaternion.identity);
+					TogglePlacement();
+				}
 			}
 		}
 	}
