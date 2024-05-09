@@ -1,8 +1,5 @@
 Box select (Visual WIP)
-Pause/play
-Pause/play all
 Create source
-Button for cycling through clips
 Prevent moving sources out of bounds
 Load clips dynamically from a folder
 Export audio
