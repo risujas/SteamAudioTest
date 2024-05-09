@@ -45,6 +45,33 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextClip"",
+                    ""type"": ""Button"",
+                    ""id"": ""31a0d0fe-8102-44ab-a4c7-7b413014bfd6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PreviousClip"",
+                    ""type"": ""Button"",
+                    ""id"": ""591a9927-d58f-42c3-aa37-b2a1cd0f1070"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Delete"",
+                    ""type"": ""Button"",
+                    ""id"": ""01e41582-5cb0-4a12-afad-7166f6a418a5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -69,6 +96,39 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""VolumeUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""32fd042e-3c6f-474d-87f9-54b4c39e65e5"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextClip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""338086b4-c247-41f0-9e7b-a2c93fb91b3f"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PreviousClip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""afe18884-d26a-4625-8824-155a6de09542"",
+                    ""path"": ""<Keyboard>/delete"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Delete"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -79,6 +139,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Global = asset.FindActionMap("Global", throwIfNotFound: true);
         m_Global_VolumeDown = m_Global.FindAction("VolumeDown", throwIfNotFound: true);
         m_Global_VolumeUp = m_Global.FindAction("VolumeUp", throwIfNotFound: true);
+        m_Global_NextClip = m_Global.FindAction("NextClip", throwIfNotFound: true);
+        m_Global_PreviousClip = m_Global.FindAction("PreviousClip", throwIfNotFound: true);
+        m_Global_Delete = m_Global.FindAction("Delete", throwIfNotFound: true);
     }
 
     ~@Controls()
@@ -147,12 +210,18 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<IGlobalActions> m_GlobalActionsCallbackInterfaces = new List<IGlobalActions>();
     private readonly InputAction m_Global_VolumeDown;
     private readonly InputAction m_Global_VolumeUp;
+    private readonly InputAction m_Global_NextClip;
+    private readonly InputAction m_Global_PreviousClip;
+    private readonly InputAction m_Global_Delete;
     public struct GlobalActions
     {
         private @Controls m_Wrapper;
         public GlobalActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @VolumeDown => m_Wrapper.m_Global_VolumeDown;
         public InputAction @VolumeUp => m_Wrapper.m_Global_VolumeUp;
+        public InputAction @NextClip => m_Wrapper.m_Global_NextClip;
+        public InputAction @PreviousClip => m_Wrapper.m_Global_PreviousClip;
+        public InputAction @Delete => m_Wrapper.m_Global_Delete;
         public InputActionMap Get() { return m_Wrapper.m_Global; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -168,6 +237,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @VolumeUp.started += instance.OnVolumeUp;
             @VolumeUp.performed += instance.OnVolumeUp;
             @VolumeUp.canceled += instance.OnVolumeUp;
+            @NextClip.started += instance.OnNextClip;
+            @NextClip.performed += instance.OnNextClip;
+            @NextClip.canceled += instance.OnNextClip;
+            @PreviousClip.started += instance.OnPreviousClip;
+            @PreviousClip.performed += instance.OnPreviousClip;
+            @PreviousClip.canceled += instance.OnPreviousClip;
+            @Delete.started += instance.OnDelete;
+            @Delete.performed += instance.OnDelete;
+            @Delete.canceled += instance.OnDelete;
         }
 
         private void UnregisterCallbacks(IGlobalActions instance)
@@ -178,6 +256,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @VolumeUp.started -= instance.OnVolumeUp;
             @VolumeUp.performed -= instance.OnVolumeUp;
             @VolumeUp.canceled -= instance.OnVolumeUp;
+            @NextClip.started -= instance.OnNextClip;
+            @NextClip.performed -= instance.OnNextClip;
+            @NextClip.canceled -= instance.OnNextClip;
+            @PreviousClip.started -= instance.OnPreviousClip;
+            @PreviousClip.performed -= instance.OnPreviousClip;
+            @PreviousClip.canceled -= instance.OnPreviousClip;
+            @Delete.started -= instance.OnDelete;
+            @Delete.performed -= instance.OnDelete;
+            @Delete.canceled -= instance.OnDelete;
         }
 
         public void RemoveCallbacks(IGlobalActions instance)
@@ -199,5 +286,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     {
         void OnVolumeDown(InputAction.CallbackContext context);
         void OnVolumeUp(InputAction.CallbackContext context);
+        void OnNextClip(InputAction.CallbackContext context);
+        void OnPreviousClip(InputAction.CallbackContext context);
+        void OnDelete(InputAction.CallbackContext context);
     }
 }

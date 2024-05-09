@@ -164,21 +164,6 @@ public class AudioSourceController : MonoBehaviour
 			{
 				transform.parent.Rotate(Vector3.up * Input.mousePositionDelta.x * rotationSpeed * Time.deltaTime);
 			}
-
-			if (Input.GetKeyDown(KeyCode.LeftArrow))
-			{
-				audioSource.clip = audioSourceManager.GetPreviousClip(audioSource.clip);
-			}
-
-			if (Input.GetKeyDown(KeyCode.RightArrow))
-			{
-				audioSource.clip = audioSourceManager.GetNextClip(audioSource.clip);
-			}
-
-			if (Input.GetKeyDown(KeyCode.Delete))
-			{
-				Destroy(gameObject);
-			}
 		}
 	}
 
@@ -191,10 +176,13 @@ public class AudioSourceController : MonoBehaviour
 	private void Awake()
 	{
 		controls = new Controls();
-		controls.Global.Enable();
+		controls.Enable();
 
 		controls.Global.VolumeUp.performed += VolumeUp_performed;
 		controls.Global.VolumeDown.performed += VolumeDown_performed;
+		controls.Global.NextClip.performed += NextClip_performed;
+		controls.Global.PreviousClip.performed += PreviousClip_performed;
+		controls.Global.Delete.performed += Delete_performed;
 	}
 
 	private void Start()
@@ -210,6 +198,11 @@ public class AudioSourceController : MonoBehaviour
 		{
 			started = true;
 		}
+	}
+
+	private void OnDestroy()
+	{
+		controls.Disable();
 	}
 
 	private void Update()
@@ -229,6 +222,21 @@ public class AudioSourceController : MonoBehaviour
 	private void VolumeDown_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
 	{
 		DecreaseVolume();
+	}
+
+	private void PreviousClip_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+	{
+		audioSource.clip = audioSourceManager.GetPreviousClip(audioSource.clip);
+	}
+
+	private void NextClip_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+	{
+		audioSource.clip = audioSourceManager.GetNextClip(audioSource.clip);
+	}
+
+	private void Delete_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+	{
+		Destroy(gameObject);
 	}
 	#endregion
 }
