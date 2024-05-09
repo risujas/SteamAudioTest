@@ -524,7 +524,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &79486720
 MonoBehaviour:
@@ -1639,7 +1639,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 765052917}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 752197575}
+        m_TargetAssemblyTypeName: AudioSourceManager, Assembly-CSharp
+        m_MethodName: ToggleDeletion
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &765052917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3455,6 +3467,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9189558627559487533, guid: dd9ce78111117b04d85328af675a4176,
+        type: 3}
+      propertyPath: deletionButtonText
+      value: 
+      objectReference: {fileID: 1809731547}
     - target: {fileID: 9189558627559487533, guid: dd9ce78111117b04d85328af675a4176,
         type: 3}
       propertyPath: placementButtonText
