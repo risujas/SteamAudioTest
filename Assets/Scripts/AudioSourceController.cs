@@ -27,7 +27,8 @@ public class AudioSourceController : MonoBehaviour
 	private float panelLerpSpeed = 8.0f;
 	private float finishTime = 0.0f;
 	private bool started = false;
-	private bool paused = false;
+
+	public bool Paused { get; set; } = false;
 
 	public void PlayPreviousClip()
 	{
@@ -39,11 +40,23 @@ public class AudioSourceController : MonoBehaviour
 		audioSource.clip = audioSourceManager.GetPreviousClip(audioSource.clip);
 	}
 
+	public void Pause()
+	{
+		Paused = true;
+		audioSource.Pause();
+	}
+
+	public void Resume()
+	{
+		Paused = false;
+		audioSource.UnPause();
+	}
+
 	public void TogglePause()
 	{
-		paused = !paused;
+		Paused = !Paused;
 
-		if (paused)
+		if (Paused)
 		{
 			audioSource.Pause();
 		}
@@ -70,7 +83,7 @@ public class AudioSourceController : MonoBehaviour
 
 	private void ControlPlayback()
 	{
-		if (paused)
+		if (Paused)
 		{
 			return;
 		}
@@ -108,7 +121,7 @@ public class AudioSourceController : MonoBehaviour
 			distanceText.text = string.Format("Distance: {0:0.00}m", Vector3.Distance(audioSource.transform.position, audioListener.transform.position));
 			volumeText.text = string.Format("Volume: {0:0.0}", audioSource.volume);
 			heightPanel.text = string.Format("Relative height: {0:0.0}m", audioSource.transform.position.y - audioListener.transform.position.y);
-			pauseText.text = paused ? "Resume" : "Pause";
+			pauseText.text = Paused ? "Resume" : "Pause";
 		}
 	}
 

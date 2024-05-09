@@ -11,6 +11,22 @@ public class AudioSourceManager : MonoBehaviour
 
 	private List<AudioSourceController> selectedControllers = new List<AudioSourceController>();
 
+	public void PauseAllControllers(bool pause)
+	{
+		var allControllers = FindObjectsByType<AudioSourceController>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+		foreach (var controller in allControllers)
+		{
+			if (pause)
+			{
+				controller.Pause();
+			}
+			else
+			{
+				controller.Resume();
+			}
+		}
+	}
+
 	public AudioClip GetNextClip(AudioClip currentClip)
 	{
 		if (!availableClips.Contains(currentClip))
