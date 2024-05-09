@@ -72,6 +72,33 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EnableMove"",
+                    ""type"": ""Button"",
+                    ""id"": ""3e3e30ee-10c6-47e5-868f-493c14a0e975"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EnableHeightAdjustment"",
+                    ""type"": ""Button"",
+                    ""id"": ""5719a54b-f98b-4281-a4e6-fa4f0af9ba3e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EnableRotate"",
+                    ""type"": ""Button"",
+                    ""id"": ""37cf6bef-10c5-4aa5-8ed9-a5dd51ff5906"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -129,6 +156,61 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Delete"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6723a304-a582-4b72-b069-cc016bef2716"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EnableMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2eb71374-5b7f-4bfe-9ab7-ca71810f1d7b"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EnableMove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eef18a31-d55e-4440-abd2-0387f455fd6f"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EnableHeightAdjustment"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b54af495-2c52-445b-9c37-ed28af46361d"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EnableHeightAdjustment"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""15a1062f-bac3-4088-97a8-8e0734d48633"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EnableRotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -142,6 +224,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Global_NextClip = m_Global.FindAction("NextClip", throwIfNotFound: true);
         m_Global_PreviousClip = m_Global.FindAction("PreviousClip", throwIfNotFound: true);
         m_Global_Delete = m_Global.FindAction("Delete", throwIfNotFound: true);
+        m_Global_EnableMove = m_Global.FindAction("EnableMove", throwIfNotFound: true);
+        m_Global_EnableHeightAdjustment = m_Global.FindAction("EnableHeightAdjustment", throwIfNotFound: true);
+        m_Global_EnableRotate = m_Global.FindAction("EnableRotate", throwIfNotFound: true);
     }
 
     ~@Controls()
@@ -213,6 +298,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Global_NextClip;
     private readonly InputAction m_Global_PreviousClip;
     private readonly InputAction m_Global_Delete;
+    private readonly InputAction m_Global_EnableMove;
+    private readonly InputAction m_Global_EnableHeightAdjustment;
+    private readonly InputAction m_Global_EnableRotate;
     public struct GlobalActions
     {
         private @Controls m_Wrapper;
@@ -222,6 +310,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @NextClip => m_Wrapper.m_Global_NextClip;
         public InputAction @PreviousClip => m_Wrapper.m_Global_PreviousClip;
         public InputAction @Delete => m_Wrapper.m_Global_Delete;
+        public InputAction @EnableMove => m_Wrapper.m_Global_EnableMove;
+        public InputAction @EnableHeightAdjustment => m_Wrapper.m_Global_EnableHeightAdjustment;
+        public InputAction @EnableRotate => m_Wrapper.m_Global_EnableRotate;
         public InputActionMap Get() { return m_Wrapper.m_Global; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -246,6 +337,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Delete.started += instance.OnDelete;
             @Delete.performed += instance.OnDelete;
             @Delete.canceled += instance.OnDelete;
+            @EnableMove.started += instance.OnEnableMove;
+            @EnableMove.performed += instance.OnEnableMove;
+            @EnableMove.canceled += instance.OnEnableMove;
+            @EnableHeightAdjustment.started += instance.OnEnableHeightAdjustment;
+            @EnableHeightAdjustment.performed += instance.OnEnableHeightAdjustment;
+            @EnableHeightAdjustment.canceled += instance.OnEnableHeightAdjustment;
+            @EnableRotate.started += instance.OnEnableRotate;
+            @EnableRotate.performed += instance.OnEnableRotate;
+            @EnableRotate.canceled += instance.OnEnableRotate;
         }
 
         private void UnregisterCallbacks(IGlobalActions instance)
@@ -265,6 +365,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Delete.started -= instance.OnDelete;
             @Delete.performed -= instance.OnDelete;
             @Delete.canceled -= instance.OnDelete;
+            @EnableMove.started -= instance.OnEnableMove;
+            @EnableMove.performed -= instance.OnEnableMove;
+            @EnableMove.canceled -= instance.OnEnableMove;
+            @EnableHeightAdjustment.started -= instance.OnEnableHeightAdjustment;
+            @EnableHeightAdjustment.performed -= instance.OnEnableHeightAdjustment;
+            @EnableHeightAdjustment.canceled -= instance.OnEnableHeightAdjustment;
+            @EnableRotate.started -= instance.OnEnableRotate;
+            @EnableRotate.performed -= instance.OnEnableRotate;
+            @EnableRotate.canceled -= instance.OnEnableRotate;
         }
 
         public void RemoveCallbacks(IGlobalActions instance)
@@ -289,5 +398,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnNextClip(InputAction.CallbackContext context);
         void OnPreviousClip(InputAction.CallbackContext context);
         void OnDelete(InputAction.CallbackContext context);
+        void OnEnableMove(InputAction.CallbackContext context);
+        void OnEnableHeightAdjustment(InputAction.CallbackContext context);
+        void OnEnableRotate(InputAction.CallbackContext context);
     }
 }

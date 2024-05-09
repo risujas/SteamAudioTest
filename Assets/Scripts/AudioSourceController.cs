@@ -150,17 +150,17 @@ public class AudioSourceController : MonoBehaviour
 	{
 		if (panel.gameObject.activeInHierarchy)
 		{
-			if (Input.GetKey(KeyCode.M) || Input.GetMouseButton(1))
+			if (controls.Global.EnableMove.ReadValue<float>() > 0.5f)
 			{
 				transform.position += new Vector3(Input.mousePositionDelta.x, 0.0f, Input.mousePositionDelta.y) * dragSpeed * Time.deltaTime;
 			}
 
-			if (Input.GetKey(KeyCode.H) || Input.GetMouseButton(2))
+			if (controls.Global.EnableHeightAdjustment.ReadValue<float>() > 0.5f)
 			{
 				transform.position += new Vector3(0.0f, Input.mousePositionDelta.y, 0.0f) * dragSpeed * Time.deltaTime;
 			}
 
-			if (Input.GetKey(KeyCode.R))
+			if (controls.Global.EnableRotate.ReadValue<float>() > 0.5f)
 			{
 				transform.parent.Rotate(Vector3.up * Input.mousePositionDelta.x * rotationSpeed * Time.deltaTime);
 			}

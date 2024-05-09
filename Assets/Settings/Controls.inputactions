@@ -49,6 +49,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "EnableMove",
+                    "type": "Button",
+                    "id": "3e3e30ee-10c6-47e5-868f-493c14a0e975",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EnableHeightAdjustment",
+                    "type": "Button",
+                    "id": "5719a54b-f98b-4281-a4e6-fa4f0af9ba3e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EnableRotate",
+                    "type": "Button",
+                    "id": "37cf6bef-10c5-4aa5-8ed9-a5dd51ff5906",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -104,6 +131,61 @@
                     "processors": "",
                     "groups": "",
                     "action": "Delete",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6723a304-a582-4b72-b069-cc016bef2716",
+                    "path": "<Keyboard>/m",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EnableMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2eb71374-5b7f-4bfe-9ab7-ca71810f1d7b",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EnableMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "eef18a31-d55e-4440-abd2-0387f455fd6f",
+                    "path": "<Keyboard>/h",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EnableHeightAdjustment",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b54af495-2c52-445b-9c37-ed28af46361d",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EnableHeightAdjustment",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "15a1062f-bac3-4088-97a8-8e0734d48633",
+                    "path": "<Keyboard>/r",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EnableRotate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
