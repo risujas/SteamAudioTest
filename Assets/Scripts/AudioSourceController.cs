@@ -23,18 +23,18 @@ public class AudioSourceController : MonoBehaviour
 	private AudioLoudnessChecker audioLoudnessChecker;
 	private Material audioVisualizerMaterial;
 
+	private Controls controls;
 	private AudioListener audioListener;
 	private AudioSourceManager audioSourceManager;
 
-	private Controls controls;
-
 	private float panelLerpSpeed = 8.0f;
 	private float finishTime = 0.0f;
-	private bool started = false;
+	private bool startedPlayback = false;
 	private float volumeChangeGranularity = 0.05f;
 
-	public bool Paused { get; set; } = false;
+	public bool isPaused { get; private set; } = false;
 
+	#region Public methods
 	public void PlayPreviousClip()
 	{
 		audioSource.clip = audioSourceManager.GetNextClip(audioSource.clip);
@@ -47,21 +47,21 @@ public class AudioSourceController : MonoBehaviour
 
 	public void Pause()
 	{
-		Paused = true;
+		isPaused = true;
 		audioSource.Pause();
 	}
 
 	public void Resume()
 	{
-		Paused = false;
+		isPaused = false;
 		audioSource.UnPause();
 	}
 
 	public void TogglePause()
 	{
-		Paused = !Paused;
+		isPaused = !isPaused;
 
-		if (Paused)
+		if (isPaused)
 		{
 			audioSource.Pause();
 		}
@@ -100,24 +100,26 @@ public class AudioSourceController : MonoBehaviour
 
 		panel.gameObject.SetActive(enabled);
 	}
+	#endregion
 
+	#region Private methods
 	private void ControlPlayback()
 	{
-		if (Paused)
+		if (isPaused)
 		{
 			return;
 		}
 
-		if (!audioSource.isPlaying && started)
+		if (!audioSource.isPlaying && startedPlayback)
 		{
 			finishTime = Time.time;
-			started = false;
+			startedPlayback = false;
 		}
 
-		if (Time.time > finishTime + loopInterval && !started)
+		if (Time.time > finishTime + loopInterval && !startedPlayback)
 		{
 			audioSource.Play();
-			started = true;
+			startedPlayback = true;
 		}
 	}
 
@@ -142,7 +144,7 @@ public class AudioSourceController : MonoBehaviour
 			volumeText.text = string.Format("Volume: {0:0.00}", audioSource.volume);
 			intervalText.text = string.Format("Interval: {0}", loopInterval);
 			heightPanel.text = string.Format("Relative height: {0:0.0}m", audioSource.transform.position.y - audioListener.transform.position.y);
-			pauseText.text = Paused ? "Resume" : "Pause";
+			pauseText.text = isPaused ? "Resume" : "Pause";
 		}
 	}
 
@@ -172,7 +174,9 @@ public class AudioSourceController : MonoBehaviour
 		Color targetColor = Color32.Lerp(Color.white, Color.red, audioLoudnessChecker.NormalizedLoudness);
 		audioVisualizerMaterial.color = targetColor;
 	}
+	#endregion
 
+	#region Unity messages
 	private void Awake()
 	{
 		controls = new Controls();
@@ -196,7 +200,7 @@ public class AudioSourceController : MonoBehaviour
 
 		if (audioSource.playOnAwake)
 		{
-			started = true;
+			startedPlayback = true;
 		}
 	}
 
@@ -212,8 +216,9 @@ public class AudioSourceController : MonoBehaviour
 		HandleInput();
 		VisualizeAudio();
 	}
+	#endregion
 
-	#region Input Events
+	#region Input events
 	private void VolumeUp_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
 	{
 		IncreaseVolume();
