@@ -1,5 +1,4 @@
 Box select (Visual WIP)
-Create source, delete source, global buttons
 Prevent moving sources out of bounds
 Load clips dynamically from a folder
 Export audio
