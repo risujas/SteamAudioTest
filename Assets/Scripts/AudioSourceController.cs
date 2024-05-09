@@ -37,7 +37,7 @@ public class AudioSourceController : MonoBehaviour
 	private float minHeight = 0.3f;
 	private float maxHeight = 3.0f;
 
-	public bool isPaused { get; private set; } = false;
+	public bool isPaused { get; private set; } = true;
 
 	#region Public methods
 	public void PlayPreviousClip()
@@ -151,7 +151,7 @@ public class AudioSourceController : MonoBehaviour
 			volumeText.text = string.Format("Volume: {0:0.00}", audioSource.volume);
 			intervalText.text = string.Format("Interval: {0}", loopInterval);
 			heightPanel.text = string.Format("Relative height: {0:0.0}m", audioSource.transform.position.y - audioListener.transform.position.y);
-			pauseText.text = isPaused ? "Resume" : "Pause";
+			pauseText.text = isPaused ? "Play" : "Pause";
 		}
 	}
 
