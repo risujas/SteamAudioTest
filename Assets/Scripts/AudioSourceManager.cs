@@ -173,7 +173,10 @@ public class AudioSourceManager : MonoBehaviour
 				controller.EnableInfoPanel(true);
 				selectedControllers.Add(controller);
 
-				EnablePlacement(false);
+				if (!Input.GetKey(KeyCode.LeftControl))
+				{
+					EnablePlacement(false);
+				}
 			}
 		}
 	}
@@ -187,7 +190,11 @@ public class AudioSourceManager : MonoBehaviour
 			{
 				var controller = hit.collider.gameObject.GetComponentInParent<AudioSourceController>();
 				Destroy(controller.gameObject);
-				EnableDeletion(false);
+
+				if (!Input.GetKey(KeyCode.LeftControl))
+				{
+					EnableDeletion(false);
+				}
 			}
 		}
 	}
