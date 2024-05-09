@@ -165,7 +165,10 @@ public class AudioSourceManager : MonoBehaviour
 
 			if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
 			{
-				Instantiate(audioControllerPrefab, hit.point + Vector3.up, Quaternion.identity);
+				var controller = Instantiate(audioControllerPrefab, hit.point + Vector3.up, Quaternion.identity).GetComponent<AudioSourceController>();
+				controller.EnableInfoPanel(true);
+				selectedControllers.Add(controller);
+
 				EnablePlacement(false);
 			}
 		}

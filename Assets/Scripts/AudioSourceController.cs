@@ -86,7 +86,7 @@ public class AudioSourceController : MonoBehaviour
 	{
 		if (enabled)
 		{
-			panel.transform.position = Camera.main.WorldToScreenPoint(audioSource.transform.position);
+			panel.transform.position = Camera.main.WorldToScreenPoint(transform.position);
 		}
 
 		panel.gameObject.SetActive(enabled);
