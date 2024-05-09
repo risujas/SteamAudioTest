@@ -11,14 +11,31 @@ public class AudioSourceManager : MonoBehaviour
 	[Header("Placement")]
 	[SerializeField] private GameObject audioControllerPrefab;
 	[SerializeField] private GameObject placementIndicatorPrefab;
+	[SerializeField] private LayerMask placementSurfaceLayer;
 
 	[Header("Selection")]
 	[SerializeField] private LayerMask audioSourceLayerMask;
 	[SerializeField] private ObjectSelector objectSelector;
 
 	private List<AudioSourceController> selectedControllers = new List<AudioSourceController>();
+	private GameObject placementIndicator;
 
 	public bool isPlacingController { get; private set; }
+
+	public void BeginPlacement()
+	{
+		isPlacingController = true;
+
+		if (placementIndicator == null)
+		{
+			placementIndicator = Instantiate(placementIndicatorPrefab, Vector3.zero, Quaternion.identity);
+		}
+	}
+
+	public void EndPlacement()
+	{
+		isPlacingController = false;
+	}
 
 	public void PauseAllControllers(bool pause)
 	{
@@ -90,7 +107,14 @@ public class AudioSourceManager : MonoBehaviour
 
 	private void HandlePlacement()
 	{
-
+		if (isPlacingController)
+		{
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			if (Physics.Raycast(ray, out RaycastHit hit, 100.0f, placementSurfaceLayer))
+			{
+				placementIndicator.transform.position = hit.point;
+			}
+		}
 	}
 
 	private void HandleSelection()

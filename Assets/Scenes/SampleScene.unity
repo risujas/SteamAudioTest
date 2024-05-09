@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 69159286}
   - component: {fileID: 69159289}
   - component: {fileID: 69159288}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: LowerLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,11 +372,11 @@ Transform:
   m_GameObject: {fileID: 69159285}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.5, z: 0}
-  m_LocalScale: {x: 50, y: 1, z: 50}
+  m_LocalPosition: {x: 3.587948, y: 1.6407063, z: 2.4265196}
+  m_LocalScale: {x: 1000, y: 1, z: 1000}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2008596653}
+  m_Father: {fileID: 1319191993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &69159288
 MeshRenderer:
@@ -516,15 +516,15 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 752197575}
         m_TargetAssemblyTypeName: AudioSourceManager, Assembly-CSharp
-        m_MethodName: PauseAllControllers
-        m_Mode: 6
+        m_MethodName: BeginPlacement
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &79486720
 MonoBehaviour:
@@ -1642,8 +1642,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 752197575}
         m_TargetAssemblyTypeName: AudioSourceManager, Assembly-CSharp
-        m_MethodName: PauseAllControllers
-        m_Mode: 6
+        m_MethodName: EndPlacement
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1699,7 +1699,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 797601462}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Lines
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1714,14 +1714,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 797601461}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.587948, y: 3.1407063, z: 2.4265196}
+  m_LocalScale: {x: 20, y: 1, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 67822889}
   - {fileID: 947447933}
-  m_Father: {fileID: 2008596653}
+  m_Father: {fileID: 1319191993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &820975399
 GameObject:
@@ -2361,6 +2361,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2008596653}
+  - {fileID: 69159286}
+  - {fileID: 797601462}
+  - {fileID: 1424937162}
   - {fileID: 8444081153525502989}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2509,7 +2512,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1424937162}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Letters
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2525,15 +2528,15 @@ Transform:
   m_GameObject: {fileID: 1424937161}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.501, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 3.587948, y: 3.6417062, z: 2.4265196}
+  m_LocalScale: {x: 20, y: 1, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 38899127}
   - {fileID: 377833077}
   - {fileID: 411366617}
   - {fileID: 230429594}
-  m_Father: {fileID: 2008596653}
+  m_Father: {fileID: 1319191993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1627545704
 GameObject:
@@ -3067,10 +3070,7 @@ Transform:
   m_LocalPosition: {x: 3.587948, y: 3.1407063, z: 2.4265196}
   m_LocalScale: {x: 20, y: 1, z: 20}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 69159286}
-  - {fileID: 797601462}
-  - {fileID: 1424937162}
+  m_Children: []
   m_Father: {fileID: 1319191993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2008596654
@@ -3499,6 +3499,11 @@ PrefabInstance:
       propertyPath: 'availableClips.Array.data[3]'
       value: 
       objectReference: {fileID: 8300000, guid: 7096eeb8e335930439cd1c6f69e54139, type: 3}
+    - target: {fileID: 9189558627559487533, guid: dd9ce78111117b04d85328af675a4176,
+        type: 3}
+      propertyPath: placementSurfaceLayer.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
