@@ -45,6 +45,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""1786d140-45c4-4f58-b84c-281cf6a3b1df"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -67,6 +76,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""MultiAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""09e9572b-5c1d-44ac-bbc5-834c052bf86d"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5a500c77-b6a1-409d-9bec-c616629ce3c9"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -319,6 +350,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Global = asset.FindActionMap("Global", throwIfNotFound: true);
         m_Global_Select = m_Global.FindAction("Select", throwIfNotFound: true);
         m_Global_MultiAction = m_Global.FindAction("MultiAction", throwIfNotFound: true);
+        m_Global_Cancel = m_Global.FindAction("Cancel", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Zoom = m_Camera.FindAction("Zoom", throwIfNotFound: true);
@@ -402,12 +434,14 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<IGlobalActions> m_GlobalActionsCallbackInterfaces = new List<IGlobalActions>();
     private readonly InputAction m_Global_Select;
     private readonly InputAction m_Global_MultiAction;
+    private readonly InputAction m_Global_Cancel;
     public struct GlobalActions
     {
         private @Controls m_Wrapper;
         public GlobalActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Select => m_Wrapper.m_Global_Select;
         public InputAction @MultiAction => m_Wrapper.m_Global_MultiAction;
+        public InputAction @Cancel => m_Wrapper.m_Global_Cancel;
         public InputActionMap Get() { return m_Wrapper.m_Global; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -423,6 +457,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @MultiAction.started += instance.OnMultiAction;
             @MultiAction.performed += instance.OnMultiAction;
             @MultiAction.canceled += instance.OnMultiAction;
+            @Cancel.started += instance.OnCancel;
+            @Cancel.performed += instance.OnCancel;
+            @Cancel.canceled += instance.OnCancel;
         }
 
         private void UnregisterCallbacks(IGlobalActions instance)
@@ -433,6 +470,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @MultiAction.started -= instance.OnMultiAction;
             @MultiAction.performed -= instance.OnMultiAction;
             @MultiAction.canceled -= instance.OnMultiAction;
+            @Cancel.started -= instance.OnCancel;
+            @Cancel.performed -= instance.OnCancel;
+            @Cancel.canceled -= instance.OnCancel;
         }
 
         public void RemoveCallbacks(IGlobalActions instance)
@@ -602,6 +642,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     {
         void OnSelect(InputAction.CallbackContext context);
         void OnMultiAction(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

@@ -332,7 +332,13 @@ public class AudioSourceManager : MonoBehaviour
 	{
 		multiAction = controls.Global.MultiAction.ReadValue<float>() > 0.5f;
 
-		if (isPlacingController)
+		if (controls.Global.Cancel.triggered)
+		{
+			EnablePlacement(false);
+			EnableDeletion(false);
+			EnableSelection(true);
+		}
+		else if (isPlacingController)
 		{
 			HandlePlacement();
 		}
