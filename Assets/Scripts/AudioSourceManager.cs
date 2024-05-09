@@ -61,6 +61,8 @@ public class AudioSourceManager : MonoBehaviour
 			{
 				placementIndicator = Instantiate(placementIndicatorPrefab, Vector3.zero, Quaternion.identity);
 			}
+
+			DeselectControllers();
 		}
 		else
 		{
@@ -77,6 +79,7 @@ public class AudioSourceManager : MonoBehaviour
 		{
 			EnableDeletion(false);
 		}
+		EnableSelection(!enable);
 
 		globalHintText.text = enable ? "Hold Control to place multiple objects." : "";
 	}
@@ -90,7 +93,6 @@ public class AudioSourceManager : MonoBehaviour
 		{
 			deletionButtonText.text = "Cancel";
 			deletionButtonText.fontStyle = FontStyles.Italic;
-
 		}
 		else
 		{
@@ -104,8 +106,15 @@ public class AudioSourceManager : MonoBehaviour
 		{
 			EnablePlacement(false);
 		}
+		EnableSelection(!enable);
 
 		globalHintText.text = enable ? "Hold Control to delete multiple objects." : "";
+	}
+
+	public void EnableSelection(bool enable)
+	{
+		DeselectControllers();
+		objectSelector.enabled = enable;
 	}
 
 	public void PauseAllControllers(bool pause)
@@ -231,14 +240,12 @@ public class AudioSourceManager : MonoBehaviour
 		{
 			placementIndicator.transform.position = hit.point;
 
-			if (controls.Global.Select.triggered && !EventSystem.current.IsPointerOverGameObject())
+			if (controls.Global.Select.WasReleasedThisFrame() && !EventSystem.current.IsPointerOverGameObject())
 			{
 				var ascParent = Instantiate(audioControllerPrefab, Vector3.zero, Quaternion.identity);
 
 				var controller = ascParent.GetComponentInChildren<AudioSourceController>();
 				controller.transform.position = hit.point + Vector3.up * 1.0f;
-
-				//controller.EnableInfoPanel(true);
 
 				allControllers.Add(controller);
 				selectedControllers.Add(controller);
@@ -261,7 +268,7 @@ public class AudioSourceManager : MonoBehaviour
 		Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 		if (Physics.Raycast(ray, out RaycastHit hit, 100.0f, audioSourceLayerMask))
 		{
-			if (controls.Global.Select.triggered && !EventSystem.current.IsPointerOverGameObject())
+			if (controls.Global.Select.WasReleasedThisFrame() && !EventSystem.current.IsPointerOverGameObject())
 			{
 				var controller = hit.collider.gameObject.GetComponentInParent<AudioSourceController>();
 
@@ -327,12 +334,10 @@ public class AudioSourceManager : MonoBehaviour
 
 		if (isPlacingController)
 		{
-			DeselectControllers();
 			HandlePlacement();
 		}
 		else if (isDeletingController)
 		{
-			DeselectControllers();
 			HandleDeletion();
 		}
 		else if (objectSelector.CompletedSelection)

@@ -90,7 +90,7 @@ public class ObjectSelector : MonoBehaviour
 
 	private void HandleInput()
 	{
-		if (controls.Global.Select.triggered && !selecting)
+		if (controls.Global.Select.WasPressedThisFrame() && !selecting)
 		{
 			initialMousePosition = Mouse.current.position.ReadValue();
 			startTime = Time.time;
@@ -99,13 +99,13 @@ public class ObjectSelector : MonoBehaviour
 
 		if (selecting)
 		{
-			if (controls.Global.Select.WasReleasedThisFrame() && !EventSystem.current.IsPointerOverGameObject())
+			if (controls.Global.Select.WasReleasedThisFrame())
 			{
 				if (UsingBoxSelection)
 				{
 					SelectWithBox();
 				}
-				else
+				else if (!EventSystem.current.IsPointerOverGameObject())
 				{
 					SelectWithRaycast();
 				}
@@ -140,6 +140,11 @@ public class ObjectSelector : MonoBehaviour
 	{
 		controls = new Controls();
 		controls.Enable();
+	}
+
+	private void OnEnable()
+	{
+		selecting = false;
 	}
 
 	private void Update()
