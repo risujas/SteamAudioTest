@@ -1,1 +1,3 @@
 Fix bug where audio restarts when focus is lost and regained
+Add crosshair when deleting objects
+Export audio?
