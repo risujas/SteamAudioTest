@@ -26,9 +26,12 @@ public class AudioSourceController : MonoBehaviour
 	private AudioListener audioListener;
 	private AudioSourceManager audioSourceManager;
 
+	private Controls controls;
+
 	private float panelLerpSpeed = 8.0f;
 	private float finishTime = 0.0f;
 	private bool started = false;
+	private float volumeChangeGranularity = 0.05f;
 
 	public bool Paused { get; set; } = false;
 
@@ -68,9 +71,14 @@ public class AudioSourceController : MonoBehaviour
 		}
 	}
 
-	public void ChangeVolume(float value)
+	public void IncreaseVolume()
 	{
-		audioSource.volume = Mathf.Clamp(audioSource.volume + value, 0.0f, 1.0f);
+		audioSource.volume = Mathf.Clamp(audioSource.volume + volumeChangeGranularity, 0.0f, 1.0f);
+	}
+
+	public void DecreaseVolume()
+	{
+		audioSource.volume = Mathf.Clamp(audioSource.volume - volumeChangeGranularity, 0.0f, 1.0f);
 	}
 
 	public void ChangeInterval(float value)
@@ -131,7 +139,7 @@ public class AudioSourceController : MonoBehaviour
 
 			clipNameText.text = string.Format("Clip: {0}", audioSource.clip.name);
 			distanceText.text = string.Format("Distance: {0:0.00}m", Vector3.Distance(audioSource.transform.position, audioListener.transform.position));
-			volumeText.text = string.Format("Volume: {0:0.0}", audioSource.volume);
+			volumeText.text = string.Format("Volume: {0:0.00}", audioSource.volume);
 			intervalText.text = string.Format("Interval: {0}", loopInterval);
 			heightPanel.text = string.Format("Relative height: {0:0.0}m", audioSource.transform.position.y - audioListener.transform.position.y);
 			pauseText.text = Paused ? "Resume" : "Pause";
@@ -171,16 +179,6 @@ public class AudioSourceController : MonoBehaviour
 			{
 				Destroy(gameObject);
 			}
-
-			if (Input.GetKeyDown(KeyCode.UpArrow))
-			{
-				ChangeVolume(0.1f);
-			}
-
-			if (Input.GetKeyDown(KeyCode.DownArrow))
-			{
-				ChangeVolume(-0.1f);
-			}
 		}
 	}
 
@@ -188,6 +186,15 @@ public class AudioSourceController : MonoBehaviour
 	{
 		Color targetColor = Color32.Lerp(Color.white, Color.red, audioLoudnessChecker.NormalizedLoudness);
 		audioVisualizerMaterial.color = targetColor;
+	}
+
+	private void Awake()
+	{
+		controls = new Controls();
+		controls.Global.Enable();
+
+		controls.Global.VolumeUp.performed += VolumeUp_performed;
+		controls.Global.VolumeDown.performed += VolumeDown_performed;
 	}
 
 	private void Start()
@@ -212,4 +219,16 @@ public class AudioSourceController : MonoBehaviour
 		HandleInput();
 		VisualizeAudio();
 	}
+
+	#region Input Events
+	private void VolumeUp_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+	{
+		IncreaseVolume();
+	}
+
+	private void VolumeDown_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+	{
+		DecreaseVolume();
+	}
+	#endregion
 }

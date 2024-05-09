@@ -1,0 +1,54 @@
+{
+    "name": "Controls",
+    "maps": [
+        {
+            "name": "Global",
+            "id": "74f02d9e-0e43-423c-860d-1277e74aae3d",
+            "actions": [
+                {
+                    "name": "VolumeDown",
+                    "type": "Button",
+                    "id": "f5935f86-7449-4747-8e5a-131c59b942ae",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "VolumeUp",
+                    "type": "Button",
+                    "id": "7cda4ef9-834f-4667-83c9-72af7034eeef",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ba238885-e49d-4849-bbe0-2c93d638c1ac",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VolumeDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "11bcf75e-fd1f-4bbf-a29a-5ba9c21d8a64",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VolumeUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
