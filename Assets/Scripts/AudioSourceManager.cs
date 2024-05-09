@@ -253,7 +253,7 @@ public class AudioSourceManager : MonoBehaviour
 	private void Awake()
 	{
 		controls = new Controls();
-		controls.Enable();
+		controls.Global.Enable();
 	}
 
 	private void Update()
