@@ -352,7 +352,13 @@ public class AudioSourceManager : MonoBehaviour
 		}
 		else
 		{
-			string hint = "(R) Rotate - (M) Move - (H) Adjust height - (Delete) Delete selected objects";
+			string hint = string.Format("({0}) Move - ({1}) Adjust height - ({2}) Rotate - ({3}) Delete selected objects - ({4}) Cancel",
+				controls.AudioSourceController.EnableMove.GetBindingDisplayString(),
+				controls.AudioSourceController.EnableHeightAdjustment.GetBindingDisplayString(),
+				controls.AudioSourceController.EnableRotate.GetBindingDisplayString(),
+				controls.AudioSourceController.Delete.GetBindingDisplayString(),
+				controls.Global.Cancel.GetBindingDisplayString());
+
 			globalHintText.text = selectedControllers.Count > 0 ? hint : "";
 		}
 

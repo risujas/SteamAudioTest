@@ -288,19 +288,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""27f376f6-160f-4f9f-bdb7-dc74b74bc174"",
-                    ""path"": ""<Keyboard>/m"",
-                    ""interactions"": ""Hold"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""EnableMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6e0b125e-dc31-4b8d-bd07-63e619eaff24"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""id"": ""f36a3f39-3053-4903-8f37-f1c25ee4a5fe"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": """",
@@ -311,18 +300,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c3edecff-3f22-46f6-8032-1a179e431f4b"",
-                    ""path"": ""<Keyboard>/h"",
-                    ""interactions"": ""Hold"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""EnableHeightAdjustment"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""73eb02b6-d2e4-4bd0-9c8c-278a4459ad19"",
-                    ""path"": ""<Mouse>/middleButton"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": """",
@@ -333,7 +311,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""529fb33d-0124-4e75-aa98-ecb5e5a4fc1b"",
-                    ""path"": ""<Keyboard>/r"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": """",
