@@ -28,6 +28,7 @@ public class AudioSourceManager : MonoBehaviour
 	private GameObject placementIndicator;
 	private bool isPlacingController;
 	private bool isDeletingController;
+	private bool usedMultipleActions = false;
 
 	public void TogglePlacement()
 	{
@@ -41,6 +42,7 @@ public class AudioSourceManager : MonoBehaviour
 
 	public void EnablePlacement(bool enable)
 	{
+		usedMultipleActions = false;
 		isPlacingController = enable;
 
 		if (isPlacingController)
@@ -72,6 +74,7 @@ public class AudioSourceManager : MonoBehaviour
 
 	public void EnableDeletion(bool enable)
 	{
+		usedMultipleActions = false;
 		isDeletingController = enable;
 
 		if (isDeletingController)
@@ -170,19 +173,23 @@ public class AudioSourceManager : MonoBehaviour
 				var ascParent = Instantiate(audioControllerPrefab, Vector3.zero, Quaternion.identity);
 
 				var controller = ascParent.GetComponentInChildren<AudioSourceController>();
-
-				allControllers.Add(controller);
-
 				controller.transform.position = hit.point + Vector3.up * 1.0f;
 
 				controller.EnableInfoPanel(true);
+
+				allControllers.Add(controller);
 				selectedControllers.Add(controller);
 
+				usedMultipleActions = true;
 				if (!Input.GetKey(KeyCode.LeftControl))
 				{
 					EnablePlacement(false);
 				}
 			}
+		}
+		if (usedMultipleActions && Input.GetKeyUp(KeyCode.LeftControl))
+		{
+			EnablePlacement(false);
 		}
 	}
 
@@ -198,11 +205,16 @@ public class AudioSourceManager : MonoBehaviour
 				allControllers.Remove(controller);
 				Destroy(controller.gameObject);
 
+				usedMultipleActions = true;
 				if (!Input.GetKey(KeyCode.LeftControl) || allControllers.Count == 0)
 				{
 					EnableDeletion(false);
 				}
 			}
+		}
+		if (usedMultipleActions && Input.GetKeyUp(KeyCode.LeftControl))
+		{
+			EnableDeletion(false);
 		}
 	}
 
