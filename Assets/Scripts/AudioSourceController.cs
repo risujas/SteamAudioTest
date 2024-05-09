@@ -222,7 +222,7 @@ public class AudioSourceController : MonoBehaviour
 	private void Awake()
 	{
 		controls = new Controls();
-		controls.Enable();
+		controls.AudioSourceController.Enable();
 	}
 
 	private void Start()
