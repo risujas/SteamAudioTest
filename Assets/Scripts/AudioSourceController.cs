@@ -10,6 +10,7 @@ public class AudioSourceController : MonoBehaviour
 	[SerializeField] private float rotationSpeed = 10.0f;
 	[SerializeField] private float dragSpeed = 3.0f;
 	[SerializeField] private MeshRenderer audioVisualizerRenderer;
+	[SerializeField] private LayerMask groundLayer;
 
 	[Header("Info Panel")]
 	[SerializeField] private RectTransform panel;
@@ -156,6 +157,8 @@ public class AudioSourceController : MonoBehaviour
 
 		if (panel.gameObject.activeInHierarchy)
 		{
+			Vector3 oldPos = transform.position;
+
 			if (controls.Global.EnableMove.ReadValue<float>() > 0.5f)
 			{
 				transform.position += new Vector3(deltaX, 0.0f, deltaY) * dragSpeed * Time.deltaTime;
@@ -169,6 +172,11 @@ public class AudioSourceController : MonoBehaviour
 			if (controls.Global.EnableRotate.ReadValue<float>() > 0.5f)
 			{
 				transform.parent.Rotate(Vector3.up * deltaX * rotationSpeed * Time.deltaTime);
+			}
+
+			if (!Physics.Raycast(transform.position, Vector3.down, 100.0f, groundLayer))
+			{
+				transform.position = oldPos;
 			}
 		}
 	}

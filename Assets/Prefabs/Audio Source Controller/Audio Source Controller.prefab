@@ -470,6 +470,9 @@ MonoBehaviour:
   rotationSpeed: 20
   dragSpeed: 3
   audioVisualizerRenderer: {fileID: 3188805148215895914}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 2048
   panel: {fileID: 6978672150105415442}
   clipNameText: {fileID: 7859706359015382144}
   distanceText: {fileID: 4177956565450958298}
