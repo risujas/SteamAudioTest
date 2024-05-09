@@ -11,6 +11,7 @@ using UnityEngine.Networking;
 public class AudioSourceManager : MonoBehaviour
 {
 	[SerializeField] private List<AudioClip> availableClips;
+	[SerializeField] private TextMeshProUGUI globalHintText;
 
 	[Header("Placement")]
 	[SerializeField] private GameObject audioControllerPrefab;
@@ -76,6 +77,8 @@ public class AudioSourceManager : MonoBehaviour
 		{
 			EnableDeletion(false);
 		}
+
+		globalHintText.text = enable ? "Hold Control to place multiple objects." : "";
 	}
 
 	public void EnableDeletion(bool enable)
@@ -87,17 +90,22 @@ public class AudioSourceManager : MonoBehaviour
 		{
 			deletionButtonText.text = "Cancel";
 			deletionButtonText.fontStyle = FontStyles.Italic;
+
 		}
 		else
 		{
 			deletionButtonText.text = "Delete";
 			deletionButtonText.fontStyle = FontStyles.Normal;
+
+			globalHintText.text = string.Empty;
 		}
 
 		if (enable)
 		{
 			EnablePlacement(false);
 		}
+
+		globalHintText.text = enable ? "Hold Control to delete multiple objects." : "";
 	}
 
 	public void PauseAllControllers(bool pause)
@@ -318,10 +326,12 @@ public class AudioSourceManager : MonoBehaviour
 
 		if (isPlacingController)
 		{
+			DeselectControllers();
 			HandlePlacement();
 		}
 		else if (isDeletingController)
 		{
+			DeselectControllers();
 			HandleDeletion();
 		}
 		else if (objectSelector.CompletedSelection)
