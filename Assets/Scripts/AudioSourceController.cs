@@ -179,6 +179,31 @@ public class AudioSourceController : MonoBehaviour
 				transform.parent.Rotate(Vector3.up * deltaX * rotationSpeed * Time.deltaTime);
 			}
 
+			if (controls.Global.VolumeUp.triggered)
+			{
+				IncreaseVolume();
+			}
+
+			if (controls.Global.VolumeDown.triggered)
+			{
+				DecreaseVolume();
+			}
+
+			if (controls.Global.PreviousClip.triggered)
+			{
+				audioSource.clip = audioSourceManager.GetPreviousClip(audioSource.clip);
+			}
+
+			if (controls.Global.NextClip.triggered)
+			{
+				audioSource.clip = audioSourceManager.GetNextClip(audioSource.clip);
+			}
+
+			if (controls.Global.Delete.triggered)
+			{
+				Destroy(gameObject);
+			}
+
 			if (!Physics.Raycast(transform.position, Vector3.down, 100.0f, groundLayer))
 			{
 				transform.position = oldPos;
@@ -198,12 +223,6 @@ public class AudioSourceController : MonoBehaviour
 	{
 		controls = new Controls();
 		controls.Enable();
-
-		controls.Global.VolumeUp.performed += VolumeUp_performed;
-		controls.Global.VolumeDown.performed += VolumeDown_performed;
-		controls.Global.NextClip.performed += NextClip_performed;
-		controls.Global.PreviousClip.performed += PreviousClip_performed;
-		controls.Global.Delete.performed += Delete_performed;
 	}
 
 	private void Start()
@@ -232,33 +251,6 @@ public class AudioSourceController : MonoBehaviour
 		UpdateInfoPanel();
 		HandleInput();
 		VisualizeAudio();
-	}
-	#endregion
-
-	#region Input events
-	private void VolumeUp_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-	{
-		IncreaseVolume();
-	}
-
-	private void VolumeDown_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-	{
-		DecreaseVolume();
-	}
-
-	private void PreviousClip_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-	{
-		audioSource.clip = audioSourceManager.GetPreviousClip(audioSource.clip);
-	}
-
-	private void NextClip_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-	{
-		audioSource.clip = audioSourceManager.GetNextClip(audioSource.clip);
-	}
-
-	private void Delete_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-	{
-		Destroy(gameObject);
 	}
 	#endregion
 }
