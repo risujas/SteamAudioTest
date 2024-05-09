@@ -163,7 +163,7 @@ public class AudioSourceManager : MonoBehaviour
 		{
 			placementIndicator.transform.position = hit.point;
 
-			if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+			if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject())
 			{
 				var controller = Instantiate(audioControllerPrefab, hit.point + Vector3.up, Quaternion.identity).GetComponent<AudioSourceController>();
 				controller.EnableInfoPanel(true);
@@ -179,7 +179,7 @@ public class AudioSourceManager : MonoBehaviour
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		if (Physics.Raycast(ray, out RaycastHit hit, 100.0f, audioSourceLayerMask))
 		{
-			if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+			if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject())
 			{
 				var controller = hit.collider.gameObject.GetComponentInParent<AudioSourceController>();
 				Destroy(controller.gameObject);
