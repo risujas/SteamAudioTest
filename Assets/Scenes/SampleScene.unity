@@ -3226,18 +3226,23 @@ PrefabInstance:
     - target: {fileID: 9189558627559487533, guid: dd9ce78111117b04d85328af675a4176,
         type: 3}
       propertyPath: availableClips.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 9189558627559487533, guid: dd9ce78111117b04d85328af675a4176,
+        type: 3}
+      propertyPath: 'availableClips.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 85d2b84753acd0846a26aebc941b6dfe, type: 3}
     - target: {fileID: 9189558627559487533, guid: dd9ce78111117b04d85328af675a4176,
         type: 3}
       propertyPath: 'availableClips.Array.data[1]'
       value: 
-      objectReference: {fileID: 8300000, guid: 47533052773913342a5b388d10bba53c, type: 3}
+      objectReference: {fileID: 8300000, guid: 9b50b25aa9468634da57b887bebc0b91, type: 3}
     - target: {fileID: 9189558627559487533, guid: dd9ce78111117b04d85328af675a4176,
         type: 3}
       propertyPath: 'availableClips.Array.data[2]'
       value: 
-      objectReference: {fileID: 8300000, guid: 67b1ed6bf2095e0479a11a7386b27be2, type: 3}
+      objectReference: {fileID: 8300000, guid: 2e49371b426239743832dc19542c2ad6, type: 3}
     - target: {fileID: 9189558627559487533, guid: dd9ce78111117b04d85328af675a4176,
         type: 3}
       propertyPath: 'availableClips.Array.data[3]'
