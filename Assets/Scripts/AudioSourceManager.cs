@@ -5,11 +5,20 @@ using UnityEngine;
 
 public class AudioSourceManager : MonoBehaviour
 {
-	[SerializeField] private LayerMask audioSourceLayerMask;
+	[Header("Clips")]
 	[SerializeField] private List<AudioClip> availableClips;
+
+	[Header("Placement")]
+	[SerializeField] private GameObject audioControllerPrefab;
+	[SerializeField] private GameObject placementIndicatorPrefab;
+
+	[Header("Selection")]
+	[SerializeField] private LayerMask audioSourceLayerMask;
 	[SerializeField] private ObjectSelector objectSelector;
 
 	private List<AudioSourceController> selectedControllers = new List<AudioSourceController>();
+
+	public bool isPlacingController { get; private set; }
 
 	public void PauseAllControllers(bool pause)
 	{
@@ -79,7 +88,12 @@ public class AudioSourceManager : MonoBehaviour
 		}
 	}
 
-	private void HandleInput()
+	private void HandlePlacement()
+	{
+
+	}
+
+	private void HandleSelection()
 	{
 		if (objectSelector.CompletedSelection)
 		{
@@ -114,6 +128,13 @@ public class AudioSourceManager : MonoBehaviour
 
 	private void Update()
 	{
-		HandleInput();
+		if (isPlacingController)
+		{
+			HandlePlacement();
+		}
+		else
+		{
+			HandleSelection();
+		}
 	}
 }
