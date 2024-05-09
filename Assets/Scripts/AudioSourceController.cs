@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class AudioSourceController : MonoBehaviour
 {
@@ -150,21 +151,24 @@ public class AudioSourceController : MonoBehaviour
 
 	private void HandleInput()
 	{
+		float deltaX = Mouse.current.delta.x.ReadValue();
+		float deltaY = Mouse.current.delta.y.ReadValue();
+
 		if (panel.gameObject.activeInHierarchy)
 		{
 			if (controls.Global.EnableMove.ReadValue<float>() > 0.5f)
 			{
-				transform.position += new Vector3(Input.mousePositionDelta.x, 0.0f, Input.mousePositionDelta.y) * dragSpeed * Time.deltaTime;
+				transform.position += new Vector3(deltaX, 0.0f, deltaY) * dragSpeed * Time.deltaTime;
 			}
 
 			if (controls.Global.EnableHeightAdjustment.ReadValue<float>() > 0.5f)
 			{
-				transform.position += new Vector3(0.0f, Input.mousePositionDelta.y, 0.0f) * dragSpeed * Time.deltaTime;
+				transform.position += new Vector3(0.0f, deltaY, 0.0f) * dragSpeed * Time.deltaTime;
 			}
 
 			if (controls.Global.EnableRotate.ReadValue<float>() > 0.5f)
 			{
-				transform.parent.Rotate(Vector3.up * Input.mousePositionDelta.x * rotationSpeed * Time.deltaTime);
+				transform.parent.Rotate(Vector3.up * deltaX * rotationSpeed * Time.deltaTime);
 			}
 		}
 	}
