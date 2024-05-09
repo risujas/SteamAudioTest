@@ -3668,6 +3668,56 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5862619177226897598, guid: dd9ce78111117b04d85328af675a4176,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862619177226897598, guid: dd9ce78111117b04d85328af675a4176,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862619177226897598, guid: dd9ce78111117b04d85328af675a4176,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862619177226897598, guid: dd9ce78111117b04d85328af675a4176,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862619177226897598, guid: dd9ce78111117b04d85328af675a4176,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862619177226897598, guid: dd9ce78111117b04d85328af675a4176,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862619177226897598, guid: dd9ce78111117b04d85328af675a4176,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862619177226897598, guid: dd9ce78111117b04d85328af675a4176,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862619177226897598, guid: dd9ce78111117b04d85328af675a4176,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 687
+      objectReference: {fileID: 0}
+    - target: {fileID: 5862619177226897598, guid: dd9ce78111117b04d85328af675a4176,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 278
+      objectReference: {fileID: 0}
     - target: {fileID: 6708362018984489944, guid: dd9ce78111117b04d85328af675a4176,
         type: 3}
       propertyPath: m_Name

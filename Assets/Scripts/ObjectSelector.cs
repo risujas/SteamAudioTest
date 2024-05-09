@@ -129,10 +129,11 @@ public class ObjectSelector : MonoBehaviour
 	{
 		boxSelectorIndicatorPanel.gameObject.SetActive(selecting);
 
-		float width = currentMousePosition.x - initialMousePosition.x;
-		float height = currentMousePosition.y - initialMousePosition.y;
+		Vector2 lowerLeft = new Vector2(Mathf.Min(initialMousePosition.x, currentMousePosition.x), Mathf.Min(initialMousePosition.y, currentMousePosition.y));
+		Vector2 upperRight = new Vector2(Mathf.Max(initialMousePosition.x, currentMousePosition.x), Mathf.Max(initialMousePosition.y, currentMousePosition.y));
 
-		// :thinking:
+		boxSelectorIndicatorPanel.position = lowerLeft;
+		boxSelectorIndicatorPanel.sizeDelta = upperRight - lowerLeft;
 	}
 
 	private void Awake()
