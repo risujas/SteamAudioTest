@@ -29,72 +29,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             ""id"": ""74f02d9e-0e43-423c-860d-1277e74aae3d"",
             ""actions"": [
                 {
-                    ""name"": ""VolumeDown"",
+                    ""name"": ""Select"",
                     ""type"": ""Button"",
-                    ""id"": ""f5935f86-7449-4747-8e5a-131c59b942ae"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""VolumeUp"",
-                    ""type"": ""Button"",
-                    ""id"": ""7cda4ef9-834f-4667-83c9-72af7034eeef"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""NextClip"",
-                    ""type"": ""Button"",
-                    ""id"": ""31a0d0fe-8102-44ab-a4c7-7b413014bfd6"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""PreviousClip"",
-                    ""type"": ""Button"",
-                    ""id"": ""591a9927-d58f-42c3-aa37-b2a1cd0f1070"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Delete"",
-                    ""type"": ""Button"",
-                    ""id"": ""01e41582-5cb0-4a12-afad-7166f6a418a5"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""EnableMove"",
-                    ""type"": ""Button"",
-                    ""id"": ""3e3e30ee-10c6-47e5-868f-493c14a0e975"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""EnableHeightAdjustment"",
-                    ""type"": ""Button"",
-                    ""id"": ""5719a54b-f98b-4281-a4e6-fa4f0af9ba3e"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""EnableRotate"",
-                    ""type"": ""Button"",
-                    ""id"": ""37cf6bef-10c5-4aa5-8ed9-a5dd51ff5906"",
+                    ""id"": ""c4871e36-cfda-4937-a16b-433604758935"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -103,7 +40,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""MultiAction"",
                     ""type"": ""Button"",
-                    ""id"": ""07b6a4e9-7784-4f34-961c-b92df5ecc4a8"",
+                    ""id"": ""4462d6b6-b51c-4e5d-b5a2-5e77ee6caaba"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -113,7 +50,109 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""ba238885-e49d-4849-bbe0-2c93d638c1ac"",
+                    ""id"": ""9502e87f-844e-4286-a605-aa657c0df129"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""523ff8d0-bb3d-44ba-8505-76ae74339797"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MultiAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""AudioSourceController"",
+            ""id"": ""e12f0570-4466-4ea9-8deb-d847a5110046"",
+            ""actions"": [
+                {
+                    ""name"": ""VolumeDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""0c5b448a-98d4-4475-ba96-52b839665974"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""VolumeUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""d7f7fb73-c3bc-4437-b2af-e3c79c8ee80d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextClip"",
+                    ""type"": ""Button"",
+                    ""id"": ""b842223a-e8e0-478f-8223-30f8af34321a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PreviousClip"",
+                    ""type"": ""Button"",
+                    ""id"": ""0ca4795a-d8a9-4a37-a51a-d9fc924162fb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Delete"",
+                    ""type"": ""Button"",
+                    ""id"": ""3ad4fe9a-cea3-462c-9247-c83dd65e13be"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EnableMove"",
+                    ""type"": ""Button"",
+                    ""id"": ""9ae739c2-f809-45d5-bc6f-9decb7cba195"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EnableHeightAdjustment"",
+                    ""type"": ""Button"",
+                    ""id"": ""02f34e00-8042-487b-a2d3-a23d0db83604"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EnableRotate"",
+                    ""type"": ""Button"",
+                    ""id"": ""ee41b9d2-7df8-418d-a268-c1baae05ebdb"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""8a8214ae-b7c3-4cf3-9851-3f2c5bf1b903"",
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -124,7 +163,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""11bcf75e-fd1f-4bbf-a29a-5ba9c21d8a64"",
+                    ""id"": ""d06f4a77-b9a0-4433-a2c3-1d4119863bb3"",
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -135,7 +174,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""32fd042e-3c6f-474d-87f9-54b4c39e65e5"",
+                    ""id"": ""2bf45582-8e0a-4cb9-9e7a-eacd985f9555"",
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -146,7 +185,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""338086b4-c247-41f0-9e7b-a2c93fb91b3f"",
+                    ""id"": ""7563699f-3b50-435b-ac5c-f7a39d8270b8"",
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -157,7 +196,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""afe18884-d26a-4625-8824-155a6de09542"",
+                    ""id"": ""21a1bd53-4e68-4f4c-974a-041ea3443047"",
                     ""path"": ""<Keyboard>/delete"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -168,7 +207,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6723a304-a582-4b72-b069-cc016bef2716"",
+                    ""id"": ""27f376f6-160f-4f9f-bdb7-dc74b74bc174"",
                     ""path"": ""<Keyboard>/m"",
                     ""interactions"": ""Hold"",
                     ""processors"": """",
@@ -179,7 +218,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2eb71374-5b7f-4bfe-9ab7-ca71810f1d7b"",
+                    ""id"": ""6e0b125e-dc31-4b8d-bd07-63e619eaff24"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": ""Hold"",
                     ""processors"": """",
@@ -190,7 +229,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""eef18a31-d55e-4440-abd2-0387f455fd6f"",
+                    ""id"": ""c3edecff-3f22-46f6-8032-1a179e431f4b"",
                     ""path"": ""<Keyboard>/h"",
                     ""interactions"": ""Hold"",
                     ""processors"": """",
@@ -201,7 +240,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b54af495-2c52-445b-9c37-ed28af46361d"",
+                    ""id"": ""73eb02b6-d2e4-4bd0-9c8c-278a4459ad19"",
                     ""path"": ""<Mouse>/middleButton"",
                     ""interactions"": ""Hold"",
                     ""processors"": """",
@@ -212,23 +251,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""15a1062f-bac3-4088-97a8-8e0734d48633"",
+                    ""id"": ""529fb33d-0124-4e75-aa98-ecb5e5a4fc1b"",
                     ""path"": ""<Keyboard>/r"",
                     ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""EnableRotate"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b0c3ab0d-3f3c-4447-839a-0c47c74a1f63"",
-                    ""path"": ""<Keyboard>/leftCtrl"",
-                    ""interactions"": ""Hold"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MultiAction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -239,20 +267,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
 }");
         // Global
         m_Global = asset.FindActionMap("Global", throwIfNotFound: true);
-        m_Global_VolumeDown = m_Global.FindAction("VolumeDown", throwIfNotFound: true);
-        m_Global_VolumeUp = m_Global.FindAction("VolumeUp", throwIfNotFound: true);
-        m_Global_NextClip = m_Global.FindAction("NextClip", throwIfNotFound: true);
-        m_Global_PreviousClip = m_Global.FindAction("PreviousClip", throwIfNotFound: true);
-        m_Global_Delete = m_Global.FindAction("Delete", throwIfNotFound: true);
-        m_Global_EnableMove = m_Global.FindAction("EnableMove", throwIfNotFound: true);
-        m_Global_EnableHeightAdjustment = m_Global.FindAction("EnableHeightAdjustment", throwIfNotFound: true);
-        m_Global_EnableRotate = m_Global.FindAction("EnableRotate", throwIfNotFound: true);
+        m_Global_Select = m_Global.FindAction("Select", throwIfNotFound: true);
         m_Global_MultiAction = m_Global.FindAction("MultiAction", throwIfNotFound: true);
+        // AudioSourceController
+        m_AudioSourceController = asset.FindActionMap("AudioSourceController", throwIfNotFound: true);
+        m_AudioSourceController_VolumeDown = m_AudioSourceController.FindAction("VolumeDown", throwIfNotFound: true);
+        m_AudioSourceController_VolumeUp = m_AudioSourceController.FindAction("VolumeUp", throwIfNotFound: true);
+        m_AudioSourceController_NextClip = m_AudioSourceController.FindAction("NextClip", throwIfNotFound: true);
+        m_AudioSourceController_PreviousClip = m_AudioSourceController.FindAction("PreviousClip", throwIfNotFound: true);
+        m_AudioSourceController_Delete = m_AudioSourceController.FindAction("Delete", throwIfNotFound: true);
+        m_AudioSourceController_EnableMove = m_AudioSourceController.FindAction("EnableMove", throwIfNotFound: true);
+        m_AudioSourceController_EnableHeightAdjustment = m_AudioSourceController.FindAction("EnableHeightAdjustment", throwIfNotFound: true);
+        m_AudioSourceController_EnableRotate = m_AudioSourceController.FindAction("EnableRotate", throwIfNotFound: true);
     }
 
     ~@Controls()
     {
         Debug.Assert(!m_Global.enabled, "This will cause a leak and performance issues, Controls.Global.Disable() has not been called.");
+        Debug.Assert(!m_AudioSourceController.enabled, "This will cause a leak and performance issues, Controls.AudioSourceController.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -314,27 +346,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     // Global
     private readonly InputActionMap m_Global;
     private List<IGlobalActions> m_GlobalActionsCallbackInterfaces = new List<IGlobalActions>();
-    private readonly InputAction m_Global_VolumeDown;
-    private readonly InputAction m_Global_VolumeUp;
-    private readonly InputAction m_Global_NextClip;
-    private readonly InputAction m_Global_PreviousClip;
-    private readonly InputAction m_Global_Delete;
-    private readonly InputAction m_Global_EnableMove;
-    private readonly InputAction m_Global_EnableHeightAdjustment;
-    private readonly InputAction m_Global_EnableRotate;
+    private readonly InputAction m_Global_Select;
     private readonly InputAction m_Global_MultiAction;
     public struct GlobalActions
     {
         private @Controls m_Wrapper;
         public GlobalActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @VolumeDown => m_Wrapper.m_Global_VolumeDown;
-        public InputAction @VolumeUp => m_Wrapper.m_Global_VolumeUp;
-        public InputAction @NextClip => m_Wrapper.m_Global_NextClip;
-        public InputAction @PreviousClip => m_Wrapper.m_Global_PreviousClip;
-        public InputAction @Delete => m_Wrapper.m_Global_Delete;
-        public InputAction @EnableMove => m_Wrapper.m_Global_EnableMove;
-        public InputAction @EnableHeightAdjustment => m_Wrapper.m_Global_EnableHeightAdjustment;
-        public InputAction @EnableRotate => m_Wrapper.m_Global_EnableRotate;
+        public InputAction @Select => m_Wrapper.m_Global_Select;
         public InputAction @MultiAction => m_Wrapper.m_Global_MultiAction;
         public InputActionMap Get() { return m_Wrapper.m_Global; }
         public void Enable() { Get().Enable(); }
@@ -345,6 +363,72 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_GlobalActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_GlobalActionsCallbackInterfaces.Add(instance);
+            @Select.started += instance.OnSelect;
+            @Select.performed += instance.OnSelect;
+            @Select.canceled += instance.OnSelect;
+            @MultiAction.started += instance.OnMultiAction;
+            @MultiAction.performed += instance.OnMultiAction;
+            @MultiAction.canceled += instance.OnMultiAction;
+        }
+
+        private void UnregisterCallbacks(IGlobalActions instance)
+        {
+            @Select.started -= instance.OnSelect;
+            @Select.performed -= instance.OnSelect;
+            @Select.canceled -= instance.OnSelect;
+            @MultiAction.started -= instance.OnMultiAction;
+            @MultiAction.performed -= instance.OnMultiAction;
+            @MultiAction.canceled -= instance.OnMultiAction;
+        }
+
+        public void RemoveCallbacks(IGlobalActions instance)
+        {
+            if (m_Wrapper.m_GlobalActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IGlobalActions instance)
+        {
+            foreach (var item in m_Wrapper.m_GlobalActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_GlobalActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public GlobalActions @Global => new GlobalActions(this);
+
+    // AudioSourceController
+    private readonly InputActionMap m_AudioSourceController;
+    private List<IAudioSourceControllerActions> m_AudioSourceControllerActionsCallbackInterfaces = new List<IAudioSourceControllerActions>();
+    private readonly InputAction m_AudioSourceController_VolumeDown;
+    private readonly InputAction m_AudioSourceController_VolumeUp;
+    private readonly InputAction m_AudioSourceController_NextClip;
+    private readonly InputAction m_AudioSourceController_PreviousClip;
+    private readonly InputAction m_AudioSourceController_Delete;
+    private readonly InputAction m_AudioSourceController_EnableMove;
+    private readonly InputAction m_AudioSourceController_EnableHeightAdjustment;
+    private readonly InputAction m_AudioSourceController_EnableRotate;
+    public struct AudioSourceControllerActions
+    {
+        private @Controls m_Wrapper;
+        public AudioSourceControllerActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @VolumeDown => m_Wrapper.m_AudioSourceController_VolumeDown;
+        public InputAction @VolumeUp => m_Wrapper.m_AudioSourceController_VolumeUp;
+        public InputAction @NextClip => m_Wrapper.m_AudioSourceController_NextClip;
+        public InputAction @PreviousClip => m_Wrapper.m_AudioSourceController_PreviousClip;
+        public InputAction @Delete => m_Wrapper.m_AudioSourceController_Delete;
+        public InputAction @EnableMove => m_Wrapper.m_AudioSourceController_EnableMove;
+        public InputAction @EnableHeightAdjustment => m_Wrapper.m_AudioSourceController_EnableHeightAdjustment;
+        public InputAction @EnableRotate => m_Wrapper.m_AudioSourceController_EnableRotate;
+        public InputActionMap Get() { return m_Wrapper.m_AudioSourceController; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(AudioSourceControllerActions set) { return set.Get(); }
+        public void AddCallbacks(IAudioSourceControllerActions instance)
+        {
+            if (instance == null || m_Wrapper.m_AudioSourceControllerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_AudioSourceControllerActionsCallbackInterfaces.Add(instance);
             @VolumeDown.started += instance.OnVolumeDown;
             @VolumeDown.performed += instance.OnVolumeDown;
             @VolumeDown.canceled += instance.OnVolumeDown;
@@ -369,12 +453,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @EnableRotate.started += instance.OnEnableRotate;
             @EnableRotate.performed += instance.OnEnableRotate;
             @EnableRotate.canceled += instance.OnEnableRotate;
-            @MultiAction.started += instance.OnMultiAction;
-            @MultiAction.performed += instance.OnMultiAction;
-            @MultiAction.canceled += instance.OnMultiAction;
         }
 
-        private void UnregisterCallbacks(IGlobalActions instance)
+        private void UnregisterCallbacks(IAudioSourceControllerActions instance)
         {
             @VolumeDown.started -= instance.OnVolumeDown;
             @VolumeDown.performed -= instance.OnVolumeDown;
@@ -400,27 +481,29 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @EnableRotate.started -= instance.OnEnableRotate;
             @EnableRotate.performed -= instance.OnEnableRotate;
             @EnableRotate.canceled -= instance.OnEnableRotate;
-            @MultiAction.started -= instance.OnMultiAction;
-            @MultiAction.performed -= instance.OnMultiAction;
-            @MultiAction.canceled -= instance.OnMultiAction;
         }
 
-        public void RemoveCallbacks(IGlobalActions instance)
+        public void RemoveCallbacks(IAudioSourceControllerActions instance)
         {
-            if (m_Wrapper.m_GlobalActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_AudioSourceControllerActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IGlobalActions instance)
+        public void SetCallbacks(IAudioSourceControllerActions instance)
         {
-            foreach (var item in m_Wrapper.m_GlobalActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_AudioSourceControllerActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_GlobalActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_AudioSourceControllerActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public GlobalActions @Global => new GlobalActions(this);
+    public AudioSourceControllerActions @AudioSourceController => new AudioSourceControllerActions(this);
     public interface IGlobalActions
+    {
+        void OnSelect(InputAction.CallbackContext context);
+        void OnMultiAction(InputAction.CallbackContext context);
+    }
+    public interface IAudioSourceControllerActions
     {
         void OnVolumeDown(InputAction.CallbackContext context);
         void OnVolumeUp(InputAction.CallbackContext context);
@@ -430,6 +513,5 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnEnableMove(InputAction.CallbackContext context);
         void OnEnableHeightAdjustment(InputAction.CallbackContext context);
         void OnEnableRotate(InputAction.CallbackContext context);
-        void OnMultiAction(InputAction.CallbackContext context);
     }
 }

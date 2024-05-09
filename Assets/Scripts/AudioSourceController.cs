@@ -162,44 +162,44 @@ public class AudioSourceController : MonoBehaviour
 		{
 			Vector3 oldPos = transform.position;
 
-			if (controls.Global.EnableMove.ReadValue<float>() > 0.5f)
+			if (controls.AudioSourceController.EnableMove.ReadValue<float>() > 0.5f)
 			{
 				transform.position += new Vector3(deltaX, 0.0f, deltaY) * dragSpeed * Time.deltaTime;
 			}
 
-			if (controls.Global.EnableHeightAdjustment.ReadValue<float>() > 0.5f)
+			if (controls.AudioSourceController.EnableHeightAdjustment.ReadValue<float>() > 0.5f)
 			{
 				transform.position += new Vector3(0.0f, deltaY, 0.0f) * dragSpeed * Time.deltaTime;
 				transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, minHeight, maxHeight), transform.position.z);
 
 			}
 
-			if (controls.Global.EnableRotate.ReadValue<float>() > 0.5f)
+			if (controls.AudioSourceController.EnableRotate.ReadValue<float>() > 0.5f)
 			{
 				transform.parent.Rotate(Vector3.up * deltaX * rotationSpeed * Time.deltaTime);
 			}
 
-			if (controls.Global.VolumeUp.triggered)
+			if (controls.AudioSourceController.VolumeUp.triggered)
 			{
 				IncreaseVolume();
 			}
 
-			if (controls.Global.VolumeDown.triggered)
+			if (controls.AudioSourceController.VolumeDown.triggered)
 			{
 				DecreaseVolume();
 			}
 
-			if (controls.Global.PreviousClip.triggered)
+			if (controls.AudioSourceController.PreviousClip.triggered)
 			{
 				audioSource.clip = audioSourceManager.GetPreviousClip(audioSource.clip);
 			}
 
-			if (controls.Global.NextClip.triggered)
+			if (controls.AudioSourceController.NextClip.triggered)
 			{
 				audioSource.clip = audioSourceManager.GetNextClip(audioSource.clip);
 			}
 
-			if (controls.Global.Delete.triggered)
+			if (controls.AudioSourceController.Delete.triggered)
 			{
 				Destroy(gameObject);
 			}

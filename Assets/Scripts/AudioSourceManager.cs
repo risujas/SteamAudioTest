@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class AudioSourceManager : MonoBehaviour
 {
@@ -29,6 +30,9 @@ public class AudioSourceManager : MonoBehaviour
 	private bool isPlacingController;
 	private bool isDeletingController;
 	private bool usedMultipleActions = false;
+
+	private Controls controls;
+	private bool multiAction;
 
 	public void TogglePlacement()
 	{
@@ -163,12 +167,12 @@ public class AudioSourceManager : MonoBehaviour
 
 	private void HandlePlacement()
 	{
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 		if (Physics.Raycast(ray, out RaycastHit hit, 100.0f, placementSurfaceLayer))
 		{
 			placementIndicator.transform.position = hit.point;
 
-			if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject())
+			if (controls.Global.Select.triggered && !EventSystem.current.IsPointerOverGameObject())
 			{
 				var ascParent = Instantiate(audioControllerPrefab, Vector3.zero, Quaternion.identity);
 
@@ -181,13 +185,13 @@ public class AudioSourceManager : MonoBehaviour
 				selectedControllers.Add(controller);
 
 				usedMultipleActions = true;
-				if (!Input.GetKey(KeyCode.LeftControl))
+				if (!multiAction)
 				{
 					EnablePlacement(false);
 				}
 			}
 		}
-		if (usedMultipleActions && Input.GetKeyUp(KeyCode.LeftControl))
+		if (usedMultipleActions && controls.Global.MultiAction.WasReleasedThisFrame())
 		{
 			EnablePlacement(false);
 		}
@@ -195,10 +199,10 @@ public class AudioSourceManager : MonoBehaviour
 
 	private void HandleDeletion()
 	{
-		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 		if (Physics.Raycast(ray, out RaycastHit hit, 100.0f, audioSourceLayerMask))
 		{
-			if (Input.GetMouseButtonUp(0) && !EventSystem.current.IsPointerOverGameObject())
+			if (controls.Global.Select.triggered && !EventSystem.current.IsPointerOverGameObject())
 			{
 				var controller = hit.collider.gameObject.GetComponentInParent<AudioSourceController>();
 
@@ -206,13 +210,13 @@ public class AudioSourceManager : MonoBehaviour
 				Destroy(controller.gameObject);
 
 				usedMultipleActions = true;
-				if (!Input.GetKey(KeyCode.LeftControl) || allControllers.Count == 0)
+				if (!multiAction || allControllers.Count == 0)
 				{
 					EnableDeletion(false);
 				}
 			}
 		}
-		if (usedMultipleActions && Input.GetKeyUp(KeyCode.LeftControl))
+		if (usedMultipleActions && controls.Global.MultiAction.WasReleasedThisFrame())
 		{
 			EnableDeletion(false);
 		}
@@ -220,12 +224,10 @@ public class AudioSourceManager : MonoBehaviour
 
 	private void HandleSelection()
 	{
-		bool multiSelect = Input.GetKey(KeyCode.LeftControl);
-
 		var selection = objectSelector.SelectedObjects;
 		if (selection.Count > 0)
 		{
-			if (!multiSelect)
+			if (!multiAction)
 			{
 				DeselectControllers();
 			}
@@ -248,8 +250,16 @@ public class AudioSourceManager : MonoBehaviour
 		}
 	}
 
+	private void Awake()
+	{
+		controls = new Controls();
+		controls.Enable();
+	}
+
 	private void Update()
 	{
+		multiAction = controls.Global.MultiAction.ReadValue<float>() > 0.5f;
+
 		if (isPlacingController)
 		{
 			HandlePlacement();
