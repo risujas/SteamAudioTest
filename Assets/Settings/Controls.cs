@@ -99,6 +99,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MultiAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""07b6a4e9-7784-4f34-961c-b92df5ecc4a8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -211,6 +220,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""EnableRotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b0c3ab0d-3f3c-4447-839a-0c47c74a1f63"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MultiAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -227,6 +247,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Global_EnableMove = m_Global.FindAction("EnableMove", throwIfNotFound: true);
         m_Global_EnableHeightAdjustment = m_Global.FindAction("EnableHeightAdjustment", throwIfNotFound: true);
         m_Global_EnableRotate = m_Global.FindAction("EnableRotate", throwIfNotFound: true);
+        m_Global_MultiAction = m_Global.FindAction("MultiAction", throwIfNotFound: true);
     }
 
     ~@Controls()
@@ -301,6 +322,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Global_EnableMove;
     private readonly InputAction m_Global_EnableHeightAdjustment;
     private readonly InputAction m_Global_EnableRotate;
+    private readonly InputAction m_Global_MultiAction;
     public struct GlobalActions
     {
         private @Controls m_Wrapper;
@@ -313,6 +335,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @EnableMove => m_Wrapper.m_Global_EnableMove;
         public InputAction @EnableHeightAdjustment => m_Wrapper.m_Global_EnableHeightAdjustment;
         public InputAction @EnableRotate => m_Wrapper.m_Global_EnableRotate;
+        public InputAction @MultiAction => m_Wrapper.m_Global_MultiAction;
         public InputActionMap Get() { return m_Wrapper.m_Global; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -346,6 +369,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @EnableRotate.started += instance.OnEnableRotate;
             @EnableRotate.performed += instance.OnEnableRotate;
             @EnableRotate.canceled += instance.OnEnableRotate;
+            @MultiAction.started += instance.OnMultiAction;
+            @MultiAction.performed += instance.OnMultiAction;
+            @MultiAction.canceled += instance.OnMultiAction;
         }
 
         private void UnregisterCallbacks(IGlobalActions instance)
@@ -374,6 +400,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @EnableRotate.started -= instance.OnEnableRotate;
             @EnableRotate.performed -= instance.OnEnableRotate;
             @EnableRotate.canceled -= instance.OnEnableRotate;
+            @MultiAction.started -= instance.OnMultiAction;
+            @MultiAction.performed -= instance.OnMultiAction;
+            @MultiAction.canceled -= instance.OnMultiAction;
         }
 
         public void RemoveCallbacks(IGlobalActions instance)
@@ -401,5 +430,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnEnableMove(InputAction.CallbackContext context);
         void OnEnableHeightAdjustment(InputAction.CallbackContext context);
         void OnEnableRotate(InputAction.CallbackContext context);
+        void OnMultiAction(InputAction.CallbackContext context);
     }
 }
