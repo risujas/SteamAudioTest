@@ -144,7 +144,9 @@ public class AudioSourceController : MonoBehaviour
 
 			panel.transform.position = Vector3.Lerp(panel.transform.position, targetPos, Time.deltaTime * panelLerpSpeed);
 
-			clipNameText.text = string.Format("Clip: {0}", audioSource.clip.name);
+			string clipName = audioSource.clip == null ? string.Empty : audioSource.clip.name;
+
+			clipNameText.text = string.Format("Clip: {0}", clipName);
 			distanceText.text = string.Format("Distance: {0:0.00}m", Vector3.Distance(audioSource.transform.position, audioListener.transform.position));
 			volumeText.text = string.Format("Volume: {0:0.00}", audioSource.volume);
 			intervalText.text = string.Format("Interval: {0}", loopInterval);

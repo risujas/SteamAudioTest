@@ -6,10 +6,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.Networking;
 
 public class AudioSourceManager : MonoBehaviour
 {
-	[Header("Clips")]
 	[SerializeField] private List<AudioClip> availableClips;
 
 	[Header("Placement")]
@@ -22,6 +22,8 @@ public class AudioSourceManager : MonoBehaviour
 	[Header("Selection")]
 	[SerializeField] private LayerMask audioSourceLayerMask;
 	[SerializeField] private ObjectSelector objectSelector;
+
+	private string userAudioFolder = "UserAudio";
 
 	private List<AudioSourceController> selectedControllers = new List<AudioSourceController>();
 	private List<AudioSourceController> allControllers = new List<AudioSourceController>();
@@ -115,6 +117,11 @@ public class AudioSourceManager : MonoBehaviour
 
 	public AudioClip GetNextClip(AudioClip currentClip)
 	{
+		if (availableClips.Count == 0)
+		{
+			return null;
+		}
+
 		if (!availableClips.Contains(currentClip))
 		{
 			return availableClips[0];
@@ -126,6 +133,11 @@ public class AudioSourceManager : MonoBehaviour
 
 	public AudioClip GetPreviousClip(AudioClip currentClip)
 	{
+		if (availableClips.Count == 0)
+		{
+			return null;
+		}
+
 		if (!availableClips.Contains(currentClip))
 		{
 			return availableClips[0];
@@ -148,6 +160,45 @@ public class AudioSourceManager : MonoBehaviour
 
 		return availableClips[index];
 	}
+
+	public IEnumerator LoadUserAudioClips()
+	{
+		string folderPath = Path.Combine(Application.persistentDataPath, userAudioFolder);
+		List<AudioClip> userAudioClips = new List<AudioClip>();
+
+		if (Directory.Exists(folderPath))
+		{
+			string[] fileEntries = Directory.GetFiles(folderPath);
+
+			foreach (var filePath in fileEntries)
+			{
+				if (filePath.EndsWith(".wav") || filePath.EndsWith(".mp3") || filePath.EndsWith(".ogg"))
+				{
+					using (UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip("file://" + filePath, AudioType.UNKNOWN))
+					{
+						yield return request.SendWebRequest();
+
+						if (request.result == UnityWebRequest.Result.Success)
+						{
+							AudioClip clip = DownloadHandlerAudioClip.GetContent(request);
+							clip.name = Path.GetFileNameWithoutExtension(filePath);
+							userAudioClips.Add(clip);
+						}
+						else
+						{
+							Debug.LogError(request.error);
+						}
+					}
+				}
+			}
+		}
+
+		foreach (var clip in userAudioClips)
+		{
+			availableClips.Add(clip);
+		}
+	}
+
 
 	private void DeselectControllers()
 	{
@@ -254,6 +305,11 @@ public class AudioSourceManager : MonoBehaviour
 	{
 		controls = new Controls();
 		controls.Global.Enable();
+	}
+
+	private void Start()
+	{
+		StartCoroutine(LoadUserAudioClips());
 	}
 
 	private void Update()

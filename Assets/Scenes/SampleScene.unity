@@ -3257,17 +3257,17 @@ PrefabInstance:
         type: 3}
       propertyPath: 'availableClips.Array.data[5]'
       value: 
-      objectReference: {fileID: 8300000, guid: 51c6ba89ef1d07b46850b61bfed2ac1c, type: 3}
+      objectReference: {fileID: 8300000, guid: 53c99f78b0f95be45a393e7bf26aadab, type: 3}
     - target: {fileID: 9189558627559487533, guid: dd9ce78111117b04d85328af675a4176,
         type: 3}
       propertyPath: 'availableClips.Array.data[6]'
       value: 
-      objectReference: {fileID: 8300000, guid: 5c46275d78a8c174493241084e49c310, type: 3}
+      objectReference: {fileID: 8300000, guid: 51c6ba89ef1d07b46850b61bfed2ac1c, type: 3}
     - target: {fileID: 9189558627559487533, guid: dd9ce78111117b04d85328af675a4176,
         type: 3}
       propertyPath: 'availableClips.Array.data[7]'
       value: 
-      objectReference: {fileID: 8300000, guid: 53c99f78b0f95be45a393e7bf26aadab, type: 3}
+      objectReference: {fileID: 8300000, guid: 5c46275d78a8c174493241084e49c310, type: 3}
     - target: {fileID: 9189558627559487533, guid: dd9ce78111117b04d85328af675a4176,
         type: 3}
       propertyPath: 'availableClips.Array.data[8]'
