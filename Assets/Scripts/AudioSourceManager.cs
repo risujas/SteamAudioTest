@@ -23,7 +23,7 @@ public class AudioSourceManager : MonoBehaviour
 	private List<AudioSourceController> selectedControllers = new List<AudioSourceController>();
 	private GameObject placementIndicator;
 
-	public bool isPlacingController { get; private set; }
+	private bool isPlacingController;
 
 	public void TogglePlacement()
 	{
