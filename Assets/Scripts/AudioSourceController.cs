@@ -34,6 +34,9 @@ public class AudioSourceController : MonoBehaviour
 	private bool startedPlayback = false;
 	private float volumeChangeGranularity = 0.05f;
 
+	private float minHeight = 0.3f;
+	private float maxHeight = 3.0f;
+
 	public bool isPaused { get; private set; } = false;
 
 	#region Public methods
@@ -167,6 +170,8 @@ public class AudioSourceController : MonoBehaviour
 			if (controls.Global.EnableHeightAdjustment.ReadValue<float>() > 0.5f)
 			{
 				transform.position += new Vector3(0.0f, deltaY, 0.0f) * dragSpeed * Time.deltaTime;
+				transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, minHeight, maxHeight), transform.position.z);
+
 			}
 
 			if (controls.Global.EnableRotate.ReadValue<float>() > 0.5f)
