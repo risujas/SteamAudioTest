@@ -1,3 +1,2 @@
 Box select (Visual WIP)
 Export audio
-Exit button
