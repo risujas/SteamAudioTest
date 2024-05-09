@@ -147,6 +147,16 @@ public class AudioSourceController : MonoBehaviour
 			{
 				Destroy(gameObject);
 			}
+
+			if (Input.GetKeyDown(KeyCode.UpArrow))
+			{
+				ChangeVolume(0.1f);
+			}
+
+			if (Input.GetKeyDown(KeyCode.DownArrow))
+			{
+				ChangeVolume(-0.1f);
+			}
 		}
 	}
 
