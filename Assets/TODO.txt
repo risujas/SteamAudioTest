@@ -1,4 +1,3 @@
 Box select (Visual WIP)
-Prevent moving sources out of bounds
 Load clips dynamically from a folder
 Export audio
