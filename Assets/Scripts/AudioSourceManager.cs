@@ -238,7 +238,7 @@ public class AudioSourceManager : MonoBehaviour
 				var controller = ascParent.GetComponentInChildren<AudioSourceController>();
 				controller.transform.position = hit.point + Vector3.up * 1.0f;
 
-				controller.EnableInfoPanel(true);
+				//controller.EnableInfoPanel(true);
 
 				allControllers.Add(controller);
 				selectedControllers.Add(controller);
@@ -266,6 +266,7 @@ public class AudioSourceManager : MonoBehaviour
 				var controller = hit.collider.gameObject.GetComponentInParent<AudioSourceController>();
 
 				allControllers.Remove(controller);
+				selectedControllers.Remove(controller);
 				Destroy(controller.gameObject);
 
 				usedMultipleActions = true;
@@ -338,7 +339,20 @@ public class AudioSourceManager : MonoBehaviour
 		{
 			HandleSelection();
 		}
+		else
+		{
+			string hint = "(R) Rotate - (M) Move - (H) Adjust height - (Delete) Delete selected objects";
+			globalHintText.text = selectedControllers.Count > 0 ? hint : "";
+		}
 
 		allControllers = FindObjectsByType<AudioSourceController>(FindObjectsInactive.Include, FindObjectsSortMode.None).ToList();
+
+		for (int i = selectedControllers.Count - 1; i >= 0; i--)
+		{
+			if (selectedControllers[i] == null)
+			{
+				selectedControllers.RemoveAt(i);
+			}
+		}
 	}
 }
