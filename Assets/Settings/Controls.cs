@@ -73,6 +73,56 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             ]
         },
         {
+            ""name"": ""Camera"",
+            ""id"": ""1fe49879-03ae-45f4-aff0-e6ae29ab6dd5"",
+            ""actions"": [
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""aada8080-c38c-4b86-989e-a794ccae9668"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""a8196ff7-1571-4e05-b565-f4e0531537ca"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""cb8f6523-6443-4a95-a5c2-9f7393cf2d8f"",
+                    ""path"": ""<Mouse>/scroll/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""3cc4f5cb-ec71-459c-a839-ece61a223071"",
+                    ""path"": ""<Mouse>/scroll/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
+        },
+        {
             ""name"": ""AudioSourceController"",
             ""id"": ""e12f0570-4466-4ea9-8deb-d847a5110046"",
             ""actions"": [
@@ -269,6 +319,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Global = asset.FindActionMap("Global", throwIfNotFound: true);
         m_Global_Select = m_Global.FindAction("Select", throwIfNotFound: true);
         m_Global_MultiAction = m_Global.FindAction("MultiAction", throwIfNotFound: true);
+        // Camera
+        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
+        m_Camera_Zoom = m_Camera.FindAction("Zoom", throwIfNotFound: true);
         // AudioSourceController
         m_AudioSourceController = asset.FindActionMap("AudioSourceController", throwIfNotFound: true);
         m_AudioSourceController_VolumeDown = m_AudioSourceController.FindAction("VolumeDown", throwIfNotFound: true);
@@ -284,6 +337,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     ~@Controls()
     {
         Debug.Assert(!m_Global.enabled, "This will cause a leak and performance issues, Controls.Global.Disable() has not been called.");
+        Debug.Assert(!m_Camera.enabled, "This will cause a leak and performance issues, Controls.Camera.Disable() has not been called.");
         Debug.Assert(!m_AudioSourceController.enabled, "This will cause a leak and performance issues, Controls.AudioSourceController.Disable() has not been called.");
     }
 
@@ -397,6 +451,52 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     }
     public GlobalActions @Global => new GlobalActions(this);
 
+    // Camera
+    private readonly InputActionMap m_Camera;
+    private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
+    private readonly InputAction m_Camera_Zoom;
+    public struct CameraActions
+    {
+        private @Controls m_Wrapper;
+        public CameraActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Zoom => m_Wrapper.m_Camera_Zoom;
+        public InputActionMap Get() { return m_Wrapper.m_Camera; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
+        public void AddCallbacks(ICameraActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CameraActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CameraActionsCallbackInterfaces.Add(instance);
+            @Zoom.started += instance.OnZoom;
+            @Zoom.performed += instance.OnZoom;
+            @Zoom.canceled += instance.OnZoom;
+        }
+
+        private void UnregisterCallbacks(ICameraActions instance)
+        {
+            @Zoom.started -= instance.OnZoom;
+            @Zoom.performed -= instance.OnZoom;
+            @Zoom.canceled -= instance.OnZoom;
+        }
+
+        public void RemoveCallbacks(ICameraActions instance)
+        {
+            if (m_Wrapper.m_CameraActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICameraActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CameraActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CameraActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CameraActions @Camera => new CameraActions(this);
+
     // AudioSourceController
     private readonly InputActionMap m_AudioSourceController;
     private List<IAudioSourceControllerActions> m_AudioSourceControllerActionsCallbackInterfaces = new List<IAudioSourceControllerActions>();
@@ -502,6 +602,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     {
         void OnSelect(InputAction.CallbackContext context);
         void OnMultiAction(InputAction.CallbackContext context);
+    }
+    public interface ICameraActions
+    {
+        void OnZoom(InputAction.CallbackContext context);
     }
     public interface IAudioSourceControllerActions
     {

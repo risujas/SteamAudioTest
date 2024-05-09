@@ -1064,7 +1064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetObject: {fileID: 530014756}
-  zoomSpeed: 1500
+  zoomSpeed: 300
   lerpSpeed: 10
   minHeight: 1
   maxHeight: 30

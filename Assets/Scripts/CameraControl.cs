@@ -11,10 +11,11 @@ public class CameraControl : MonoBehaviour
 	[SerializeField] private float maxHeight = 30.0f;
 
 	private float desiredHeight;
+	private Controls controls;
 
 	private void HandleInput()
 	{
-		var input = Input.GetAxis("Mouse ScrollWheel");
+		var input = controls.Camera.Zoom.ReadValue<float>();
 		desiredHeight += -input * Time.deltaTime * zoomSpeed;
 		desiredHeight = Mathf.Clamp(desiredHeight, minHeight, maxHeight);
 	}
@@ -25,6 +26,12 @@ public class CameraControl : MonoBehaviour
 		transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * lerpSpeed);
 
 		transform.LookAt(targetObject.transform);
+	}
+
+	private void Awake()
+	{
+		controls = new Controls();
+		controls.Camera.Enable();
 	}
 
 	private void Start()
