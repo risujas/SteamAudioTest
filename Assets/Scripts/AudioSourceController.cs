@@ -6,6 +6,7 @@ using UnityEngine;
 public class AudioSourceController : MonoBehaviour
 {
 	[SerializeField] private float loopInterval = 1.0f;
+	[SerializeField] private float rotationSpeed = 10.0f;
 	[SerializeField] private float dragSpeed = 3.0f;
 	[SerializeField] private MeshRenderer audioVisualizerRenderer;
 
@@ -153,9 +154,7 @@ public class AudioSourceController : MonoBehaviour
 
 			if (Input.GetKey(KeyCode.R))
 			{
-				Vector3 dir = (audioListener.transform.position - transform.position).normalized;
-				Vector3 cross = Vector3.Cross(dir, Vector3.up);
-				transform.position += Input.mousePositionDelta.x * cross * dragSpeed * Time.deltaTime;
+				transform.parent.Rotate(Vector3.up * Input.mousePositionDelta.x * rotationSpeed * Time.deltaTime);
 			}
 
 			if (Input.GetKeyDown(KeyCode.LeftArrow))

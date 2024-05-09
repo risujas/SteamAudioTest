@@ -467,6 +467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loopInterval: 1
+  rotationSpeed: 20
   dragSpeed: 3
   audioVisualizerRenderer: {fileID: 3188805148215895914}
   panel: {fileID: 6978672150105415442}
