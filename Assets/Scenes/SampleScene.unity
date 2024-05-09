@@ -516,7 +516,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 752197575}
         m_TargetAssemblyTypeName: AudioSourceManager, Assembly-CSharp
-        m_MethodName: BeginPlacement
+        m_MethodName: TogglePlacement
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1639,19 +1639,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 765052917}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 752197575}
-        m_TargetAssemblyTypeName: AudioSourceManager, Assembly-CSharp
-        m_MethodName: EndPlacement
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &765052917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3467,6 +3455,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9189558627559487533, guid: dd9ce78111117b04d85328af675a4176,
+        type: 3}
+      propertyPath: placementButtonText
+      value: 
+      objectReference: {fileID: 883899961}
     - target: {fileID: 9189558627559487533, guid: dd9ce78111117b04d85328af675a4176,
         type: 3}
       propertyPath: audioControllerPrefab

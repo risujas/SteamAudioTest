@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using UnityEngine;
 
 public class AudioSourceManager : MonoBehaviour
@@ -12,6 +13,7 @@ public class AudioSourceManager : MonoBehaviour
 	[SerializeField] private GameObject audioControllerPrefab;
 	[SerializeField] private GameObject placementIndicatorPrefab;
 	[SerializeField] private LayerMask placementSurfaceLayer;
+	[SerializeField] private TextMeshProUGUI placementButtonText;
 
 	[Header("Selection")]
 	[SerializeField] private LayerMask audioSourceLayerMask;
@@ -22,19 +24,32 @@ public class AudioSourceManager : MonoBehaviour
 
 	public bool isPlacingController { get; private set; }
 
-	public void BeginPlacement()
+	public void TogglePlacement()
 	{
-		isPlacingController = true;
-
-		if (placementIndicator == null)
+		if (!isPlacingController)
 		{
-			placementIndicator = Instantiate(placementIndicatorPrefab, Vector3.zero, Quaternion.identity);
-		}
-	}
+			placementButtonText.text = "Cancel";
+			placementButtonText.fontStyle = FontStyles.Italic;
 
-	public void EndPlacement()
-	{
-		isPlacingController = false;
+			isPlacingController = true;
+
+			if (placementIndicator == null)
+			{
+				placementIndicator = Instantiate(placementIndicatorPrefab, Vector3.zero, Quaternion.identity);
+			}
+		}
+		else
+		{
+			placementButtonText.text = "Create";
+			placementButtonText.fontStyle = FontStyles.Normal;
+
+			isPlacingController = false;
+
+			if (placementIndicator)
+			{
+				Destroy(placementIndicator);
+			}
+		}
 	}
 
 	public void PauseAllControllers(bool pause)
