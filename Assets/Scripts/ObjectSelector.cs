@@ -90,7 +90,7 @@ public class ObjectSelector : MonoBehaviour
 
 	private void HandleInput()
 	{
-		if (controls.Global.Select.WasPressedThisFrame() && !selecting)
+		if (controls.Global.Select.WasPressedThisFrame() && !selecting && !EventSystem.current.IsPointerOverGameObject())
 		{
 			initialMousePosition = Mouse.current.position.ReadValue();
 			startTime = Time.time;
@@ -105,7 +105,7 @@ public class ObjectSelector : MonoBehaviour
 				{
 					SelectWithBox();
 				}
-				else if (!EventSystem.current.IsPointerOverGameObject())
+				else
 				{
 					SelectWithRaycast();
 				}
